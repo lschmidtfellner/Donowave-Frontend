@@ -13,18 +13,27 @@ import Nav from './components/Nav'
 
 function App() {
   return (
-    <Routes>
+    <>
+      <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      <Routes>
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
+        <Route path="/" element= {Home}/>
         <Route
-          path="/"
-          element={ isLoggedIn ? <Home /> : <Signin />}
+          path="/campaigns/post"
+          element={isLoggedIn ? <CreateCampaign /> : <Signin />}
         />
-        <Route path="/campaigns/post" element={isLoggedIn ? <CreateCampaign /> : <Signin/>} />
-        <Route path='/campaigns/details' element={isLoggedIn ? <CampaignDetails /> : <Signin/> } />
-        <Route path='/myaccount' element={isLoggedIn ? <MyAccount /> : <Signin/> } />
-    </Routes>
-  );
+        <Route
+          path="/campaigns/details"
+          element={isLoggedIn ? <CampaignDetails /> : <Signin />}
+        />
+        <Route
+          path="/myaccount"
+          element={isLoggedIn ? <MyAccount /> : <Signin />}
+        />
+      </Routes>
+    </>
+  )
 }
 
-export default App;
+export default App

@@ -2,6 +2,7 @@ import React from 'react'
 
 const SingleCampaign = ({ campaign }) => (
   <div>
+    <img src=''></img>
     <h2>{campaign.title}</h2>
     <p>{campaign.deadline}</p>
     <p>

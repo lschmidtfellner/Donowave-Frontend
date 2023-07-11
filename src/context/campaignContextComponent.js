@@ -11,7 +11,7 @@ export const CampaignContextProvider = (props) => {
     api
       .get('api/campaigns/')
       .then((response) => {
-        console.log('Response from server:', response.data) // Console log to check server response
+        console.log('Response from server:', response.data)
         setCampaigns(response.data)
       })
       .catch((error) => console.log(error))

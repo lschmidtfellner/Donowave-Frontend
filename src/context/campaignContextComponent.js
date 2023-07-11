@@ -7,7 +7,7 @@ export const CampaignContextProvider = (props) => {
   const [campaigns, setCampaigns] = useState([])
 
   useEffect(() => {
-      axios.get('https://project4-fundraiser-52c48ba180da.herokuapp.com/api/campaigns/')
+      api.get('api/campaigns/')
         .then(response => {
           console.log('Response from server:', response.data); // Console log to check server response
           setCampaigns(response.data);

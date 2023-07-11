@@ -23,8 +23,7 @@ const CampaignDetails = () => {
 
   return (
     <div>
-      <img src={selectedCampaign.category}></img>
-      {/* ^^ we will need a system for pairing category with urls ^^ */}
+      <img src={categoryURLs.find(catObj => catObj.category === selectedCampaign.category).url}></img>
       <h2>{selectedCampaign.title}</h2>
       <p>{selectedCampaign.deadline}</p>
       <p>${selectedCampaign.raised_amount} of ${selectedCampaign.goal_amount}</p>

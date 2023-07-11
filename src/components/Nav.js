@@ -1,6 +1,6 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
-import { AuthContext } from '/context/AuthContextComponent';
+import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "/context/AuthContextComponent";
 
 function Nav() {
   const navigate = useNavigate();
@@ -8,7 +8,7 @@ function Nav() {
 
   const handleSignOut = () => {
     signOut();
-    navigate('/signin');
+    navigate("/signin");
   };
 
   return (

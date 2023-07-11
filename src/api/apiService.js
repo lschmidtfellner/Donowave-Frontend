@@ -1,25 +1,22 @@
 import api from './apiConfig'
 
 export const registerUser = async (registerData) => {
-  const resp = await api.post('/api/users/', { user: registerData })
-  return resp
-}
-
-export const loginUser = async (loginData) => {
-  const resp = await api.post('/api-auth/', { user: loginData })
-  return resp
-}
-
-export const verifyUser = async () => {
-  const token = localStorage.getItem('authToken')
-  if (token) {
-    api.defaults.headers.common.authorization = `Bearer ${token}`
-    const resp = await api.get('/verify')
-    return resp.data
+    const resp = await api.post('/api/register/', registerData);
+    return resp;
   }
-  return false
-}
-
-export const removeToken = () => {
-  api.defaults.headers.common.authorization = null
-}
+  
+  export const loginUser = async (loginData) => {
+    const resp = await api.post('/api/login/', loginData);
+    if (resp.status === 200) {
+      localStorage.setItem('authToken', resp.data.token);
+      api.defaults.headers.common.authorization = `Token ${resp.data.token}`;
+      return resp.data;
+    }
+    throw new Error('Invalid login credentials');
+  }
+  
+  export const removeToken = () => {
+    localStorage.removeItem('authToken');
+    api.defaults.headers.common.authorization = null;
+  }
+  

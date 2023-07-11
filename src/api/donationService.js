@@ -1,46 +1,26 @@
-import api from './apiConfig';
+import api from './apiConfig'
 
-export async function getDonations() {
-  try {
-    const response = await api.get('/donations');
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+export const getDonations = async () => {
+  const response = await api.get('/api/donations/')
+  return response.data
 }
 
-export async function getDonationById(id) {
-  try {
-    const response = await api.get(`/donations/${id}`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+export const getDonation = async (id) => {
+  const response = await api.get(`/api/donations/${id}/`)
+  return response.data
 }
 
-export async function createDonation(donationData) {
-  try {
-    const response = await api.post('/donations', donationData);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+export const createDonation = async (donationData) => {
+  const response = await api.post('/api/donations/', { donation: donationData })
+  return response.data
 }
 
-export async function updateDonation(id, donationData) {
-  try {
-    const response = await api.put(`/donations/${id}`, donationData);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+export const updateDonation = async (id, donationData) => {
+  const response = await api.put(`/api/donations/${id}/`, { donation: donationData })
+  return response.data
 }
 
-export async function deleteDonation(id) {
-  try {
-    const response = await api.delete(`/donations/${id}`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+export const deleteDonation = async (id) => {
+  const response = await api.delete(`/api/donations/${id}/`)
+  return response.data
 }

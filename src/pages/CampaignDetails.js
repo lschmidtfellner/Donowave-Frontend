@@ -2,6 +2,7 @@ import React from 'react'
 import { useLocation } from 'react-router-dom'
 import { CampaignContext } from '../context/campaignContextComponent'
 import Swal from 'sweetalert2'
+import categoryURLs from './data/categoryURLs'
 
 const CampaignDetails = () => {
   const { campaigns } = useContext(CampaignContext);

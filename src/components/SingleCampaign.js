@@ -1,4 +1,5 @@
 import React from 'react'
+import categoryURLs from './data/categoryURLs'
 
 const SingleCampaign = ({ campaign }) => (
   <div>

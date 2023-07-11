@@ -1,46 +1,26 @@
-import api from './apiConfig';
+import api from './apiConfig'
 
-export async function getCampaigns() {
-  try {
-    const response = await api.get('/campaigns');
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+export const getCampaigns = async () => {
+  const response = await api.get('/api/campaigns/')
+  return response.data
 }
 
-export async function getCampaignById(id) {
-  try {
-    const response = await api.get(`/campaigns/${id}`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+export const getCampaign = async (id) => {
+  const response = await api.get(`/api/campaigns/${id}/`)
+  return response.data
 }
 
-export async function createCampaign(campaignData) {
-  try {
-    const response = await api.post('/campaigns', campaignData);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+export const createCampaign = async (campaignData) => {
+  const response = await api.post('/api/campaigns/', { campaign: campaignData })
+  return response.data
 }
 
-export async function updateCampaign(id, campaignData) {
-  try {
-    const response = await api.put(`/campaigns/${id}`, campaignData);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+export const updateCampaign = async (id, campaignData) => {
+  const response = await api.put(`/api/campaigns/${id}/`, { campaign: campaignData })
+  return response.data
 }
 
-export async function deleteCampaign(id) {
-  try {
-    const response = await api.delete(`/campaigns/${id}`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+export const deleteCampaign = async (id) => {
+  const response = await api.delete(`/api/campaigns/${id}/`)
+  return response.data
 }

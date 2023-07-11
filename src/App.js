@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import React, { useContext, useEffect } from 'react'
 import Signin from './pages/Signin'
 import Signup from './pages/Signup'
-import { CampaignContextProvider } from './components/CarContextProvider'
+import { campaignContextProvider } from './context/campaignContextProvider'
 import api from './api/apiConfig'
 import AuthContextComponent, {
   AuthContext

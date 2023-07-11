@@ -1,8 +1,9 @@
 import React from 'react'
+import categoryURLs from './data/categoryURLs'
 
 const SingleCampaign = ({ campaign }) => (
   <div>
-    <img src=''></img>
+    <img src={categoryURLs.find(catObj => catObj.category === campaign.category).url}></img>
     <h2>{campaign.title}</h2>
     <p>{campaign.deadline}</p>
     <p>

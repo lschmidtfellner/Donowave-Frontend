@@ -5,18 +5,31 @@ export const CampaignContext = React.createContext()
 
 export const CampaignContextProvider = (props) => {
   const [campaigns, setCampaigns] = useState([])
+  const [donations, setDonations] = useState([])
 
   useEffect(() => {
-      api.get('api/campaigns/')
-        .then(response => {
-          console.log('Response from server:', response.data); // Console log to check server response
-          setCampaigns(response.data);
-        })
-        .catch((error) => console.log(error))
-    }
-  , [])
+    api
+      .get('api/campaigns/')
+      .then((response) => {
+        console.log('Response from server:', response.data) // Console log to check server response
+        setCampaigns(response.data)
+      })
+      .catch((error) => console.log(error))
+  }, [])
+
+  useEffect(() => {
+    api
+      .get('api/donations/')
+      .then((response) => {
+        console.log('Response from server: ', response.data)
+        setDonations(response.data)
+      })
+      .catch((error) => console.log(error))
+  }, [])
 
   return (
-    <CampaignContext.Provider value={{ campaigns, setCampaigns }}>{props.children}</CampaignContext.Provider>
+    <CampaignContext.Provider value={{ campaigns, setCampaigns, donations, setDonations }}>
+      {props.children}
+    </CampaignContext.Provider>
   )
 }

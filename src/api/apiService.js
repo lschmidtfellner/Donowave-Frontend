@@ -22,7 +22,7 @@ export const loginUser = async (loginData) => {
     }
     throw new Error('Invalid login credentials');
 }
-  
+
 export const isTokenValid = async () => {
     try {
       const response = await api.get('/api/is_token_valid/');

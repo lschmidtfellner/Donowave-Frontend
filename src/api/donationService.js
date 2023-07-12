@@ -11,12 +11,12 @@ export const getDonation = async (id) => {
 }
 
 export const createDonation = async (donationData) => {
-  const response = await api.post('/api/donations/', { donation: donationData })
+  const response = await api.post('/api/donations/', donationData)
   return response.data
 }
 
 export const updateDonation = async (id, donationData) => {
-  const response = await api.put(`/api/donations/${id}/`, { donation: donationData })
+  const response = await api.put(`/api/donations/${id}/`, donationData)
   return response.data
 }
 

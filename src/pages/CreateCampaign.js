@@ -133,15 +133,6 @@ const CreateCampaign = () => {
         <option value="WI">Wishes</option>
       </select>
       {errors.category && <p>{errors.category}</p>}
-      <input
-        type="checkbox"
-        name="is_active"
-        checked={campaignData.is_active}
-        onChange={(e) =>
-          setCampaignData({ ...campaignData, is_active: e.target.checked })
-        }
-      />{" "}
-      Is Active
       <button type="submit">Create Campaign</button>
     </form>
   );

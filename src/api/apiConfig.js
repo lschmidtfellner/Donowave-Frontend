@@ -1,5 +1,4 @@
 import axios from 'axios'
-
 const token = localStorage.getItem('authToken');
 const api = axios.create({
   baseURL: 'https://project4-fundraiser-52c48ba180da.herokuapp.com',

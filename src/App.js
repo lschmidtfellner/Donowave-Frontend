@@ -1,20 +1,20 @@
-import { Routes, Route } from 'react-router-dom'
-import React, { useContext, useEffect } from 'react'
-import categoryURLs from './data/categoryURLs'
-import { CampaignContext, CampaignContextProvider } from './context/campaignContextComponent'
+import { Routes, Route } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import categoryURLs from "./data/categoryURLs";
+import {
+  CampaignContext,
+  CampaignContextProvider,
+} from "./context/campaignContextComponent";
 // import AuthContextComponent, {
 //   AuthContext
 // } from '/context/AuthContextComponent'
-import api from './api/apiConfig'
-import Nav from './components/Nav'
-import Signin from './pages/Signin'
-import Signup from './pages/Signup'
-import Home from './pages/Home'
-import CreateCampaign from './pages/CreateCampaign'
-import CampaignDetails from './pages/CampaignDetails'
-
-
-
+import api from "./api/apiConfig";
+import Nav from "./components/Nav";
+import Signin from "./pages/Signin";
+import Signup from "./pages/Signup";
+import Home from "./pages/Home";
+import CreateCampaign from "./pages/CreateCampaign";
+import CampaignDetails from "./pages/CampaignDetails";
 
 function App() {
   // return (
@@ -27,20 +27,18 @@ function App() {
   // }
 
   // const AppContent = () => {
-    // const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext)
-    // // const navigate = useNavigate();
-    // const navigate = useNavigate();
-  
-    // useEffect(() => {
-    //   console.log("Logged in?", isLoggedIn);
-    //   console.log(isLoggedIn)
-    //   // if (!isLoggedIn) {
-    //   //   navigate('/auth/signin', { replace: true });
-    //   // }
-    // // }, [isLoggedIn, navigate]);
-    //   }, [isLoggedIn, navigate]);
-  
-  
+  // const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext)
+  // // const navigate = useNavigate();
+  // const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   console.log("Logged in?", isLoggedIn);
+  //   console.log(isLoggedIn)
+  //   // if (!isLoggedIn) {
+  //   //   navigate('/auth/signin', { replace: true });
+  //   // }
+  // // }, [isLoggedIn, navigate]);
+  //   }, [isLoggedIn, navigate]);
 
   return (
     <CampaignContextProvider>
@@ -51,7 +49,8 @@ function App() {
         <Route path="/signin" element={<Signin />} />
         <Route path="/" element={<Home />} />
         <Route
-          path="/campaigns/post"
+          path="/create-campaign"
+          element={<CreateCampaign />}
           // element={isLoggedIn ? <CreateCampaign /> : <Signin />}
         />
         <Route
@@ -63,8 +62,8 @@ function App() {
           // element={isLoggedIn ? <MyAccount /> : <Signin />}
         />
       </Routes>
-      </CampaignContextProvider>
-  )
+    </CampaignContextProvider>
+  );
 }
 
-export default App
+export default App;

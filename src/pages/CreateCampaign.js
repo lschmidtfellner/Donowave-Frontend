@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { createCampaign } from "../api/campaignService";
 
 const CreateCampaign = () => {
+  const navigate = useNavigate();
   const [campaignData, setCampaignData] = useState({
     title: "",
     description: "",
@@ -10,7 +12,6 @@ const CreateCampaign = () => {
     category: "",
     raised_amount: 0,
     web3_raised_amount: 0,
-    is_active: true,
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -25,44 +26,34 @@ const CreateCampaign = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrors(validate(campaignData));
+    setErrors(validateCampaignData(campaignData));
     setIsSubmitting(true);
   };
 
-  const validate = () => {
-    let isValid = true;
-    const errors = {};
+  const validateCampaignData = (data) => {
+    let errors = {};
 
-    if (!campaignData.title.trim()) {
-      isValid = false;
+    if (!data.title.trim()) {
       errors.title = "Title is required";
     }
 
-    if (!campaignData.description.trim()) {
-      isValid = false;
+    if (!data.description.trim()) {
       errors.description = "Description is required";
     }
 
-    if (!campaignData.goal_amount || campaignData.goal_amount <= 0) {
-      isValid = false;
+    if (!data.goal_amount || data.goal_amount <= 0) {
       errors.goal_amount = "Goal amount must be greater than 0";
     }
 
-    if (
-      !campaignData.deadline ||
-      new Date(campaignData.deadline) < new Date()
-    ) {
-      isValid = false;
+    if (!data.deadline || new Date(data.deadline) < new Date()) {
       errors.deadline = "Deadline must be in the future";
     }
 
-    if (!campaignData.category) {
-      isValid = false;
+    if (!data.category) {
       errors.category = "Please select a category";
     }
 
-    setErrors(errors);
-    return isValid;
+    return errors;
   };
 
   React.useEffect(() => {
@@ -73,11 +64,9 @@ const CreateCampaign = () => {
 
   const postCampaignData = async () => {
     try {
-      const response = await axios.post(
-        "https://project4-fundraiser-52c48ba180da.herokuapp.com/api/campaigns/",
-        campaignData
-      );
-      console.log("Campaign created successfully:", response.data);
+      const response = await createCampaign(campaignData);
+      console.log("Campaign created successfully:", response);
+      navigate("/"); // Redirect to the home page or any other route after successful campaign creation
     } catch (error) {
       console.error("Error creating campaign:", error);
     }

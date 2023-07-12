@@ -1,17 +1,18 @@
-import { Routes, Route } from 'react-router-dom'
-import React, { useContext, useEffect } from 'react'
-import categoryURLs from './data/categoryURLs'
-import { CampaignContext, CampaignContextProvider } from './context/campaignContextComponent'
+import { Routes, Route } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import categoryURLs from './data/categoryURLs';
+import { CampaignContext, CampaignContextProvider } from './context/campaignContextComponent';
 // import AuthContextComponent, {
 //   AuthContext
 // } from '/context/AuthContextComponent'
-import api from './api/apiConfig'
-import Nav from './components/Nav'
-import Signin from './pages/Signin'
-import Signup from './pages/Signup'
-import Home from './pages/Home'
-import CreateCampaign from './pages/CreateCampaign'
-import CampaignDetails from './pages/CampaignDetails'
+import api from './api/apiConfig';
+import Nav from './components/Nav';
+import Signin from './pages/Signin';
+import Signup from './pages/Signup';
+import Home from './pages/Home';
+import CreateCampaign from './pages/CreateCampaign';
+import CampaignDetails from './pages/CampaignDetails';
+import DonationForm from './components/DonationForm';
 
 
 

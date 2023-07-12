@@ -56,9 +56,14 @@ const Home = () => {
     campaign.title.includes(selectedItem || '') &&
     (category ? campaign.category === category : true)
   );
+  
+  // Handles search / category clearing
+  const handleReset = () => {
+    setSelectedItem('');
+    setCategory('');
+  };
 
   // Downshift functionality ends here
-
   // Below is the rendering part of this component
 
   return (
@@ -101,6 +106,8 @@ const Home = () => {
           </option>
         ))}
       </select>
+
+      <button onClick={handleReset} className="rounded-full pink-bg lg:w-1/6 md:w-1/6 py-1 w-1/3  text-white font-bold  hover:text-black mt-4">reset</button>
 
       {/* // Here we render the filtered campaigns */}
       {filteredCampaigns.map((campaign) => (

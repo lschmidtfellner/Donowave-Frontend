@@ -1,7 +1,5 @@
-
-import { Link, useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
-
+import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
 
 function Nav() {
   const navigate = useNavigate();
@@ -9,7 +7,7 @@ function Nav() {
 
   const handleSignOut = () => {
     // signOut();
-    navigate('/signin');
+    navigate("/signin");
   };
 
   return (
@@ -19,14 +17,12 @@ function Nav() {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/post">Create Campaign</Link>
+          <Link to="/create-campaign">Create Campaign</Link>
         </li>
         <li>
           <Link to="/account">My Account</Link>
         </li>
-        <li>
-          {/* <button onClick={handleSignOut}>Sign Out</button> */}
-        </li>
+        <li>{/* <button onClick={handleSignOut}>Sign Out</button> */}</li>
       </ul>
       <div className="logo">
         <h3>Logo</h3>

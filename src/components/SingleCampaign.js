@@ -3,7 +3,7 @@ import categoryURLs from '../data/categoryURLs'
 import { Link } from 'react-router-dom'
 
 const SingleCampaign = ({ campaign }) => (
-  <Link to={`/campaigns/details?${campaign.id}`}>
+  <Link to={`/campaigns/details?id=${campaign.id}`}>
     <div>
       <img
         src={

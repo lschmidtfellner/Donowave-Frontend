@@ -56,7 +56,7 @@ function App() {
         />
         <Route
           path="/campaigns/details"
-          // element={isLoggedIn ? <CampaignDetails /> : <Signin />}
+          element={<CampaignDetails/>}
         />
         <Route
           path="/myaccount"

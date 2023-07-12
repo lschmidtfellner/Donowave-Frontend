@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { isTokenValid } from '../api/apiService'
+// import { isTokenValid } from '../api/apiService'
 
 export const AuthContext = createContext(null);
 
@@ -10,12 +10,10 @@ export default function AuthContextComponent({ children }) {
   useEffect(() => {
     const token = localStorage.getItem('authToken');
     if (token) {
-      isTokenValid()
-        .then((response) => setIsLoggedIn(response.valid))
-        .catch((error) => {
-          console.error('Token validation failed:', error);
-          setIsLoggedIn(false);
-        });
+      setIsLoggedIn(true)
+    }
+    if (!token) {
+      setIsLoggedIn(false)
     }
   }, []);
 

@@ -12,20 +12,19 @@ const CampaignDetails = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const selectedCampaignId = queryParams.get("id");
-  const [selectedCampaign, setSelectedCampaign] = useState(null);
+  const [selectedCampaign, setSelectedCampaign] = useState({});
 
   useEffect(() => {
+    console.log('Running useEffect', { campaigns, selectedCampaignId });
     if (selectedCampaignId) {
       const campaign = campaigns.find(
-        (campaign) => campaign._id === selectedCampaignId
+        (campaign) => campaign.id === selectedCampaignId
       );
+      console.log('Found campaign:', campaign);
       setSelectedCampaign(campaign);
     }
   }, [campaigns, selectedCampaignId]);
-
-  if (!selectedCampaign) {
-    return <span>Loading...</span>;
-  }
+  
 
   return (
     <div>

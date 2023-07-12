@@ -1,3 +1,4 @@
+
 import { Routes, Route } from 'react-router-dom';
 import React, { useContext, useEffect } from 'react';
 import categoryURLs from './data/categoryURLs';
@@ -15,8 +16,6 @@ import CampaignDetails from './pages/CampaignDetails';
 import DonationForm from './components/DonationForm';
 
 
-
-
 function App() {
   // return (
   //   // <AuthContextComponent>
@@ -28,20 +27,18 @@ function App() {
   // }
 
   // const AppContent = () => {
-    // const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext)
-    // // const navigate = useNavigate();
-    // const navigate = useNavigate();
-  
-    // useEffect(() => {
-    //   console.log("Logged in?", isLoggedIn);
-    //   console.log(isLoggedIn)
-    //   // if (!isLoggedIn) {
-    //   //   navigate('/auth/signin', { replace: true });
-    //   // }
-    // // }, [isLoggedIn, navigate]);
-    //   }, [isLoggedIn, navigate]);
-  
-  
+  // const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext)
+  // // const navigate = useNavigate();
+  // const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   console.log("Logged in?", isLoggedIn);
+  //   console.log(isLoggedIn)
+  //   // if (!isLoggedIn) {
+  //   //   navigate('/auth/signin', { replace: true });
+  //   // }
+  // // }, [isLoggedIn, navigate]);
+  //   }, [isLoggedIn, navigate]);
 
   return (
     <CampaignContextProvider>
@@ -52,20 +49,21 @@ function App() {
         <Route path="/signin" element={<Signin />} />
         <Route path="/" element={<Home />} />
         <Route
-          path="/campaigns/post"
+          path="/create-campaign"
+          element={<CreateCampaign />}
           // element={isLoggedIn ? <CreateCampaign /> : <Signin />}
         />
         <Route
           path="/campaigns/details"
-          // element={isLoggedIn ? <CampaignDetails /> : <Signin />}
+          element={<CampaignDetails/>}
         />
         <Route
           path="/myaccount"
           // element={isLoggedIn ? <MyAccount /> : <Signin />}
         />
       </Routes>
-      </CampaignContextProvider>
-  )
+    </CampaignContextProvider>
+  );
 }
 
-export default App
+export default App;

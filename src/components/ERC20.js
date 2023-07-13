@@ -4,8 +4,8 @@ import { erc20contract, tokenTransfer } from '../interfaces/ERC20Interface.js'
 
 export const ERC20 = () => {
   const [tokenInfo, setTokenInfo] = useState({})
-  const [transaction, setTranscation] = useState({})
-  const [transactionAmount, setTranscationAmount] = useState('')
+  const [transaction, setTransaction] = useState({})
+  const [transactionAmount, setTransactionAmount] = useState('')
   const [recipientAddress, setRecipientAddress] = useState('')
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export const ERC20 = () => {
 
   async function transfer() {
     const transfer = await tokenTransfer(recipientAddress, transactionAmount)
-    setTranscation(transfer)
+    setTransaction(transfer)
   }
 
   function handleAddress(event) {
@@ -29,7 +29,7 @@ export const ERC20 = () => {
   }
 
   function handleAmount(event) {
-    setTranscationAmount(event.target.value)
+    setTransactionAmount(event.target.value)
   }
 
   return (

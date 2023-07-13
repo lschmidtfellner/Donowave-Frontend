@@ -16,7 +16,6 @@ function App() {
   const {isLoggedIn} = useContext(AuthContext)
 
   return (
-    <AuthContextComponent>
     <CampaignContextProvider value={{ isLoggedIn: false, setIsLoggedIn: () => {}, user: {}, setUser: () => {} }}>
       {/* <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> */}
       <Nav />
@@ -43,7 +42,6 @@ function App() {
         />
       </Routes>
     </CampaignContextProvider>
-    </AuthContextComponent>
   );
 }
 

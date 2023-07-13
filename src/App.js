@@ -1,19 +1,20 @@
-
-import { Routes, Route } from 'react-router-dom';
-import React, { useContext } from 'react';
-import { CampaignContextProvider } from './context/campaignContextComponent';
-import AuthContextComponent, { AuthContext } from './context/authContextComponent'
-import Nav from './components/Nav';
-import Signin from './pages/Signin';
-import Signup from './pages/Signup';
-import Home from './pages/Home';
-import CreateCampaign from './pages/CreateCampaign';
-import CampaignDetails from './pages/CampaignDetails';
-import DonationForm from './components/DonationForm';
-
+import { Routes, Route } from "react-router-dom";
+import React, { useContext } from "react";
+import { CampaignContextProvider } from "./context/campaignContextComponent";
+import AuthContextComponent, {
+  AuthContext,
+} from "./context/authContextComponent";
+import Nav from "./components/Nav";
+import Signin from "./pages/Signin";
+import Signup from "./pages/Signup";
+import Home from "./pages/Home";
+import CreateCampaign from "./pages/CreateCampaign";
+import CampaignDetails from "./pages/CampaignDetails";
+import DonationForm from "./components/DonationForm";
+import MyAccount from "./pages/MyAccount";
 
 function App() {
-  const {isLoggedIn} = useContext(AuthContext)
+  const { isLoggedIn } = useContext(AuthContext);
 
   return (
     <CampaignContextProvider value={{ isLoggedIn: false, setIsLoggedIn: () => {}, user: {}, setUser: () => {} }}>
@@ -38,7 +39,7 @@ function App() {
         />
         <Route
           path="/myaccount"
-          // element={isLoggedIn ? <MyAccount /> : <Signin />}
+          element={isLoggedIn ? <MyAccount /> : <Signin />}
         />
       </Routes>
     </CampaignContextProvider>

@@ -11,6 +11,8 @@ export const sendEther = async (web3, accounts, amount, recipient) => {
             from: accounts[0],
             to: recipient,
             value: amountInWei,
+            gas: 21000, // <-- set a gas limit
+            gasPrice: web3.utils.toWei("20", "gwei"), // <-- set a gas price
         });
 
         return transaction;

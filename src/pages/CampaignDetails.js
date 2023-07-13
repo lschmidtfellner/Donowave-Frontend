@@ -8,9 +8,11 @@ import Swal from 'sweetalert2';
 import categoryURLs from '../data/categoryURLs';
 import { getCampaign } from '../api/campaignService';
 import DonationForm from '../components/DonationForm'; // import the DonationForm component
+import { Web3Context } from '../context/web3Context'; // import the Web3Context
 
 const CampaignDetails = () => {
   const { campaigns } = useContext(CampaignContext);
+  const { web3, accounts } = useContext(Web3Context); // get web3 and accounts from context
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const selectedCampaignId = queryParams.get('id');
@@ -33,6 +35,15 @@ const CampaignDetails = () => {
     return <p>Loading...</p>;
   }
 
+  const handleDonateClick = async () => {
+    if (!web3 || accounts.length === 0) {
+      if (window.ethereum) {
+        await window.ethereum.enable();
+      }
+    }
+    setOpenDonate(true);
+  };
+
   return (
     <div>
       <img
@@ -47,7 +58,7 @@ const CampaignDetails = () => {
         ${selectedCampaign.raised_amount} of ${selectedCampaign.goal_amount}
       </p>
       <p>{selectedCampaign.description}</p>
-      <button onClick={() => setOpenDonate(true)}>Donate Now</button>
+      <button onClick={handleDonateClick}>Donate Now</button>
       {openDonate && <DonationForm setOpen={setOpenDonate} />}
     </div>
   );

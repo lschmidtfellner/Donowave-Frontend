@@ -15,7 +15,7 @@ const SingleCampaign = ({ campaign }) => (
       <h2>{campaign.title}</h2>
       <p>{dateInterpreter(campaign.deadline)}</p>
       <p>
-        ${campaign.raised_amount} of ${campaign.goal_amount}
+        {Number(campaign.raised_amount).toLocaleString()}DC of {Number(campaign.goal_amount).toLocaleString()}DC
       </p>
     </div>
   </Link>

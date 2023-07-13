@@ -58,6 +58,10 @@ function App() {
           element={<CampaignDetails/>}
         />
         <Route
+          path="/donationForm"
+          element={<DonationForm/>}
+        />
+        <Route
           path="/myaccount"
           // element={isLoggedIn ? <MyAccount /> : <Signin />}
         />

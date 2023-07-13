@@ -1,34 +1,36 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import React, { useContext, useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
   campaignContextComponent,
   CampaignContext
-} from '../context/campaignContextComponent'
-import Swal from 'sweetalert2'
-import categoryURLs from '../data/categoryURLs'
-import { getCampaign } from '../api/campaignService'
+} from '../context/campaignContextComponent';
+import Swal from 'sweetalert2';
+import categoryURLs from '../data/categoryURLs';
+import { getCampaign } from '../api/campaignService';
+import DonationForm from '../components/DonationForm'; // import the DonationForm component
 
 const CampaignDetails = () => {
-  const { campaigns } = useContext(CampaignContext)
-  const location = useLocation()
-  const queryParams = new URLSearchParams(location.search)
-  const selectedCampaignId = queryParams.get('id')
-  const [selectedCampaign, setSelectedCampaign] = useState({})
+  const { campaigns } = useContext(CampaignContext);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const selectedCampaignId = queryParams.get('id');
+  const [selectedCampaign, setSelectedCampaign] = useState({});
+  const [openDonate, setOpenDonate] = useState(false); // Add this line
 
   useEffect(() => {
-    console.log('Running useEffect', { campaigns, selectedCampaignId })
+    console.log('Running useEffect', { campaigns, selectedCampaignId });
     if (selectedCampaignId) {
       const fetchCampaign = async () => {
-        const campaign = await getCampaign(selectedCampaignId)
-        setSelectedCampaign(campaign)
-      }
-      fetchCampaign()
+        const campaign = await getCampaign(selectedCampaignId);
+        setSelectedCampaign(campaign);
+      };
+      fetchCampaign();
     }
-  }, [selectedCampaignId])
+  }, [selectedCampaignId]);
 
   // Check if the selectedCampaign object is empty
   if (Object.keys(selectedCampaign).length === 0) {
-    return <p>Loading...</p>
+    return <p>Loading...</p>;
   }
 
   return (
@@ -45,9 +47,10 @@ const CampaignDetails = () => {
         ${selectedCampaign.raised_amount} of ${selectedCampaign.goal_amount}
       </p>
       <p>{selectedCampaign.description}</p>
-      <button>Donate Now</button>
+      <button onClick={() => setOpenDonate(true)}>Donate Now</button>
+      {openDonate && <DonationForm setOpen={setOpenDonate} />}
     </div>
-  )
-}
+  );
+};
 
-export default CampaignDetails
+export default CampaignDetails;

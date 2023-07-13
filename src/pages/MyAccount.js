@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/authContextComponent";
 import { getUserCampaigns, getUserDonations } from "../api/userService";
 import SingleCampaign from "../components/SingleCampaign";
+import { Link } from "react-router-dom";
 
 function MyAccount() {
   const { user } = useContext(AuthContext);
@@ -30,7 +31,9 @@ function MyAccount() {
         <p>No campaigns found.</p>
       ) : (
         userCampaigns.map((campaign) => (
-          <SingleCampaign key={campaign.id} campaign={campaign} />
+          <Link to={`/campaigns/details?id=${campaign.id}`} key={campaign.id}>
+            <SingleCampaign campaign={campaign} />
+          </Link>
         ))
       )}
 
@@ -39,9 +42,14 @@ function MyAccount() {
         <p>No donations found.</p>
       ) : (
         userDonations.map((donation) => (
-          <div key={donation.id}>
-            <h3>{donation.amount}</h3>
-          </div>
+          <Link
+            to={`/campaigns/details?id=${donation.campaign.id}`}
+            key={donation.id}
+          >
+            <div>
+              <h3>{donation.amount}</h3>
+            </div>
+          </Link>
         ))
       )}
     </div>

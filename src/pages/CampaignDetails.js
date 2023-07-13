@@ -7,6 +7,7 @@ import {
 import Swal from 'sweetalert2'
 import categoryURLs from '../data/categoryURLs'
 import { getCampaign } from '../api/campaignService'
+import dateInterpreter from '../data/dateInterpreter'
 
 const CampaignDetails = () => {
   const { campaigns } = useContext(CampaignContext)
@@ -40,7 +41,7 @@ const CampaignDetails = () => {
         }
       ></img>
       <h2>{selectedCampaign.title}</h2>
-      <p>{selectedCampaign.deadline}</p>
+      <p>{dateInterpreter(selectedCampaign.deadline)}</p>
       <p>
         ${selectedCampaign.raised_amount} of ${selectedCampaign.goal_amount}
       </p>

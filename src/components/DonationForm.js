@@ -1,6 +1,6 @@
 import { Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { HeartIcon } from '@heroicons/react/outline';
 
@@ -8,6 +8,7 @@ export default function DonationForm() {
   const [open, setOpen] = useState(true);
   const [amount, setAmount] = useState('');
   const cancelButtonRef = useRef(null);
+  const navigate = useNavigate();
 
   const handleSubmit = () => {
     console.log(`Submitting amount: ${amount}`);
@@ -68,10 +69,13 @@ export default function DonationForm() {
                     Submit
                   </button>
                   {/* <Link to={`/campaigns/details?id=${campaign.id}`}> */}
-                    <button
+                  <button
                     type="button"
                     className="mt-3 w-full inline-flex justify-center rounded-full border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-semibold text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
-                    onClick={() => setOpen(false)}
+                    onClick={() => {
+                      setOpen(false);
+                      navigate(-1);
+                    }}
                     ref={cancelButtonRef}
                   >
                     Cancel

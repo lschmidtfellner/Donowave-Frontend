@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/authContextComponent";
 import { getUserCampaigns, getUserDonations } from "../api/userService";
+import SingleCampaign from "../components/SingleCampaign";
 
 function MyAccount() {
   const { user } = useContext(AuthContext);
@@ -29,9 +30,7 @@ function MyAccount() {
         <p>No campaigns found.</p>
       ) : (
         userCampaigns.map((campaign) => (
-          <div key={campaign.id}>
-            <h3>{campaign.title}</h3>
-          </div>
+          <SingleCampaign key={campaign.id} campaign={campaign} />
         ))
       )}
 

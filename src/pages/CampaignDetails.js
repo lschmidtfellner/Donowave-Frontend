@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import {
   campaignContextComponent,
   CampaignContext
@@ -43,10 +43,10 @@ const CampaignDetails = () => {
       <h2>{selectedCampaign.title}</h2>
       <p>{dateInterpreter(selectedCampaign.deadline)}</p>
       <p>
-        ${selectedCampaign.raised_amount} of ${selectedCampaign.goal_amount}
+        {Number(selectedCampaign.raised_amount).toLocaleString()}DC of {Number(selectedCampaign.goal_amount).toLocaleString()}DC
       </p>
       <p>{selectedCampaign.description}</p>
-      <button>Donate Now</button>
+      <Link to={`/donationForm?id=${selectedCampaignId}`}><button>Donate Now</button></Link>
     </div>
   )
 }

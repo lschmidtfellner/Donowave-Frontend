@@ -17,42 +17,32 @@ function App() {
   const { isLoggedIn } = useContext(AuthContext);
 
   return (
-    <AuthContextComponent>
-      <CampaignContextProvider
-        value={{
-          isLoggedIn: false,
-          setIsLoggedIn: () => {},
-          user: {},
-          setUser: () => {},
-        }}
-      >
-        {/* <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> */}
-        <Nav />
-        <Routes>
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/signin" element={<Signin />} />
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/create-campaign"
-            element={<CreateCampaign />}
-            // element={isLoggedIn ? <CreateCampaign /> }
-          />
-          <Route
-            path="/campaigns/details"
-            element={isLoggedIn ? <CampaignDetails /> : <Signin />}
-          />
-          <Route
-            path="/donationForm"
-            element={isLoggedIn ? <DonationForm /> : <Signin />}
-          />
-          <Route
-            path="/myaccount"
-            element={<MyAccount />}
-            // element={isLoggedIn ? <MyAccount /> : <Signin />}
-          />
-        </Routes>
-      </CampaignContextProvider>
-    </AuthContextComponent>
+    <CampaignContextProvider value={{ isLoggedIn: false, setIsLoggedIn: () => {}, user: {}, setUser: () => {} }}>
+      {/* <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> */}
+      <Nav />
+      <Routes>
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/signin" element={<Signin />} />
+        <Route path="/" element={<Home />} />
+        <Route
+          path="/create-campaign"
+          // element={<CreateCampaign />}
+          element={isLoggedIn ? <CreateCampaign /> : <Signin />}
+        />
+        <Route
+          path="/campaigns/details"
+          element={isLoggedIn ? <CampaignDetails /> : <Signin />}
+        />
+        <Route
+          path="/donationForm"
+          element={isLoggedIn ? <DonationForm /> : <Signin />}
+        />
+        <Route
+          path="/myaccount"
+          element={isLoggedIn ? <MyAccount /> : <Signin />}
+        />
+      </Routes>
+    </CampaignContextProvider>
   );
 }
 

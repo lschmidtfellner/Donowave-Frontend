@@ -5,6 +5,8 @@ import { erc20contract, tokenTransfer } from '../interfaces/ERC20Interface.js'
 export const ERC20 = () => {
   const [tokenInfo, setTokenInfo] = useState({})
   const [transaction, setTranscation] = useState({})
+  const [transactionAmount, setTranscationAmount] = useState('')
+  const [recipientAddress, setRecipientAddress] = useState('')
 
   useEffect(() => {
     async function getTokenInfo() {
@@ -18,20 +20,32 @@ export const ERC20 = () => {
   }, [])
 
   async function transfer() {
-    // hard coded, make this dynamic
-    const transfer = await tokenTransfer('0xC87CA24Ffb45a92EDb676d289fA1541Af2cb2df2', '100')
+    const transfer = await tokenTransfer(recipientAddress, transactionAmount)
     setTranscation(transfer)
-    setTimeout(() => {
-      console.log(transaction)
-    }, 3000)
+  }
+
+  function handleAddress(event) {
+    setRecipientAddress(event.target.value)
+  }
+
+  function handleAmount(event) {
+    setTranscationAmount(event.target.value)
   }
 
   return (
     <>
       <div>ERC20</div>
-      <button onClick={transfer}>Make transaction</button>
       <div>{tokenInfo.name}</div>
       <div>{tokenInfo.symbol}</div>
+      <p>Recipient Address</p>
+      <input type value={recipientAddress} onChange={handleAddress}/>
+      <br/>
+      <p>Amount</p>
+      <input value={transactionAmount} onChange={handleAmount}/>
+      <br/>
+      <button onClick={transfer}>Make transaction</button>
+      <br/>
+      <p>Transaction hash: {transaction.hash} </p>
     </>
   )
 }

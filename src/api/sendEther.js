@@ -6,16 +6,21 @@ export const sendEther = async (web3, accounts, amount, recipient) => {
 
     const amountInWei = web3.utils.toWei(amount, 'ether');
 
-    try {
-        const transaction = await web3.eth.sendTransaction({
-            from: accounts[0],
-            to: recipient,
-            value: amountInWei,
-            gas: 21000, // <-- set a gas limit
-            gasPrice: web3.utils.toWei("20", "gwei"), // <-- set a gas price
-        });
+    // Prepare the transaction object
+    const transaction = {
+        from: accounts[0],
+        to: recipient,
+        value: amountInWei,
+        gasPrice: web3.utils.toWei("1", "gwei"), 
+    };
 
-        return transaction;
+    // Log the transaction object
+    console.log('Prepared transaction:', transaction);
+
+    try {
+        const receipt = await web3.eth.sendTransaction(transaction);
+        console.log('Transaction receipt:', receipt);
+        return receipt;
     } catch (error) {
         console.error('Error sending Ether', error);
         throw error;

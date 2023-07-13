@@ -38,11 +38,11 @@ const CampaignDetails = () => {
   const handleDonateClick = async () => {
     if (!web3 || accounts.length === 0) {
       if (window.ethereum) {
-        await window.ethereum.enable();
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
       }
     }
     setOpenDonate(true);
-  };
+};
 
   return (
     <div>

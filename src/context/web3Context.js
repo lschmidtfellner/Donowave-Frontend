@@ -9,7 +9,7 @@ export function Web3ContextProvider({ children }) {
 
     useEffect(() => {
         if (window.ethereum) {
-            window.ethereum.enable().then((accounts) => {
+            window.ethereum.request({ method: 'eth_requestAccounts' }).then((accounts) => {
                 const web3Instance = new Web3(window.ethereum);
                 setWeb3(web3Instance);
                 setAccounts(accounts);

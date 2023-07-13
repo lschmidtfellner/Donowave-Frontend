@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { removeToken } from "../api/apiService";
+import { removeToken, removeUser } from "../api/apiService";
 import { AuthContext } from "../context/authContextComponent";
 
 function Nav() {
@@ -9,6 +9,7 @@ function Nav() {
 
   const handleSignOut = () => {
     removeToken();
+    removeUser()
     navigate("/");
     window.location.reload();
   };

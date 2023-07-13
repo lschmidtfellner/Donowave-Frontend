@@ -35,3 +35,7 @@ export const isTokenValid = async () => {
 export const removeToken = () => {
   localStorage.removeItem("authToken");
 };
+
+export const removeUser = () => {
+  localStorage.removeItem("user");
+};

@@ -1,38 +1,50 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/authContextComponent";
-import { CampaignContext } from "../context/campaignContextComponent";
+import { getUserCampaigns, getUserDonations } from "../api/userService";
 
 function MyAccount() {
   const { user } = useContext(AuthContext);
-  const { campaigns, donations } = useContext(CampaignContext);
+  const [userCampaigns, setUserCampaigns] = useState([]);
+  const [userDonations, setUserDonations] = useState([]);
 
-  // Filter campaigns created by the logged-in user
-  const userCampaigns = campaigns.filter(
-    (campaign) => campaign.created_by === user.id
-  );
+  useEffect(() => {
+    const fetchUserCampaignsAndDonations = async () => {
+      try {
+        const campaigns = await getUserCampaigns(user.user_id);
+        const donations = await getUserDonations(user.user_id);
+        setUserCampaigns(campaigns);
+        setUserDonations(donations);
+      } catch (error) {
+        console.error("Error fetching user campaigns and donations:", error);
+      }
+    };
 
-  // Filter donations made by the logged-in user
-  const userDonations = donations.filter(
-    (donation) => donation.donor === user.id
-  );
+    fetchUserCampaignsAndDonations();
+  }, [user.user_id]);
 
   return (
     <div>
       <h2>My Campaigns</h2>
-      {userCampaigns.map((campaign) => (
-        <div key={campaign.id}>
-          <h3>{campaign.title}</h3>
-          {/* Display other campaign details... */}
-        </div>
-      ))}
+      {userCampaigns.length === 0 ? (
+        <p>No campaigns found.</p>
+      ) : (
+        userCampaigns.map((campaign) => (
+          <div key={campaign.id}>
+            <h3>{campaign.title}</h3>
+          </div>
+        ))
+      )}
 
       <h2>My Donations</h2>
-      {userDonations.map((donation) => (
-        <div key={donation.id}>
-          <h3>{donation.amount}</h3>
-          {/* Display other donation details... */}
-        </div>
-      ))}
+      {userDonations.length === 0 ? (
+        <p>No donations found.</p>
+      ) : (
+        userDonations.map((donation) => (
+          <div key={donation.id}>
+            <h3>{donation.amount}</h3>
+          </div>
+        ))
+      )}
     </div>
   );
 }

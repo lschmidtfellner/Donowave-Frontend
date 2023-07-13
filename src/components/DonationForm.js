@@ -1,5 +1,7 @@
 import { Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
+import { Link, useLocation } from 'react-router-dom';
+
 import { HeartIcon } from '@heroicons/react/outline';
 
 export default function DonationForm() {
@@ -13,7 +15,7 @@ export default function DonationForm() {
 
   return (
     <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="fixed inset-0 overflow-y-auto" initialFocus={cancelButtonRef} onClose={() => setOpen(false)}>
+      <Dialog as="div" static className="fixed inset-0 overflow-y-auto" initialFocus={cancelButtonRef} onClose={() => setOpen(false)}>
         <div className="flex items-center justify-center min-h-screen">
           <Transition.Child
             as={Fragment}
@@ -36,43 +38,47 @@ export default function DonationForm() {
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="sm:w-full sm:max-w-lg">
-              <Dialog.Title as="h3" className="text-lg font-semibold leading-6 text-gray-900">
-                Donate Today!
-              </Dialog.Title>
-
-              <div className="mt-2">
-                <input
-                  type="number"
-                  min="0"
-                  className="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                  value={amount}
-                  onChange={(e) => {
-                    if (e.target.value >= 0) {
-                      setAmount(e.target.value);
-                    }
-                  }}
-                  placeholder="Enter amount"
-                />
-              </div>
-
-              <div className="mt-4 sm:flex sm:flex-row-reverse">
-                <button
-                  type="button"
-                  className="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-full shadow-sm text-base font-semibold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
-                  onClick={handleSubmit}
-                >
-                  Submit
-                </button>
-                <button
-                  type="button"
-                  className="mt-3 w-full inline-flex justify-center rounded-full border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-semibold text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
-                  onClick={() => setOpen(false)}
-                  ref={cancelButtonRef}
-                >
-                  Cancel
-                </button>
-              </div>
+            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+              <Dialog.Panel>
+                <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                  <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
+                    Donate Today!
+                  </Dialog.Title>
+                  <div className="mt-2">
+                    <input
+                      type="number"
+                      min="0"
+                      className="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                      value={amount}
+                      onChange={(e) => {
+                        if (e.target.value >= 0) {
+                          setAmount(e.target.value);
+                        }
+                      }}
+                      placeholder="Enter amount"
+                    />
+                  </div>
+                </div>
+                <div className="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                  <button
+                    type="button"
+                    className="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-full shadow-sm text-base font-semibold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
+                    onClick={handleSubmit}
+                  >
+                    Submit
+                  </button>
+                  {/* <Link to={`/campaigns/details?id=${campaign.id}`}> */}
+                    <button
+                    type="button"
+                    className="mt-3 w-full inline-flex justify-center rounded-full border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-semibold text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
+                    onClick={() => setOpen(false)}
+                    ref={cancelButtonRef}
+                  >
+                    Cancel
+                  </button>
+                  {/* </Link> */}
+                </div>
+              </Dialog.Panel>
             </div>
           </Transition.Child>
         </div>

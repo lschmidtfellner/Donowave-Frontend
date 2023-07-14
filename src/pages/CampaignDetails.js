@@ -1,36 +1,51 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+
+import React, { useContext, useState, useEffect } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 import {
   campaignContextComponent,
   CampaignContext
-} from '../context/campaignContextComponent'
-import Swal from 'sweetalert2'
-import categoryURLs from '../data/categoryURLs'
-import { getCampaign } from '../api/campaignService'
+} from '../context/campaignContextComponent';
+import Swal from 'sweetalert2';
+import categoryURLs from '../data/categoryURLs';
+import { getCampaign } from '../api/campaignService';
+import DonationForm from '../components/DonationForm'; // import the DonationForm component
+import { Web3Context } from '../context/web3Context'; // import the Web3Context
 import dateInterpreter from '../data/dateInterpreter'
 
+
 const CampaignDetails = () => {
-  const { campaigns } = useContext(CampaignContext)
-  const location = useLocation()
-  const queryParams = new URLSearchParams(location.search)
-  const selectedCampaignId = queryParams.get('id')
-  const [selectedCampaign, setSelectedCampaign] = useState({})
+  const { campaigns } = useContext(CampaignContext);
+  const { web3, accounts } = useContext(Web3Context); // get web3 and accounts from context
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const selectedCampaignId = queryParams.get('id');
+  const [selectedCampaign, setSelectedCampaign] = useState({});
+  const [openDonate, setOpenDonate] = useState(false); // Add this line
 
   useEffect(() => {
-    console.log('Running useEffect', { campaigns, selectedCampaignId })
+    console.log('Running useEffect', { campaigns, selectedCampaignId });
     if (selectedCampaignId) {
       const fetchCampaign = async () => {
-        const campaign = await getCampaign(selectedCampaignId)
-        setSelectedCampaign(campaign)
-      }
-      fetchCampaign()
+        const campaign = await getCampaign(selectedCampaignId);
+        setSelectedCampaign(campaign);
+      };
+      fetchCampaign();
     }
-  }, [selectedCampaignId])
+  }, [selectedCampaignId]);
 
   // Check if the selectedCampaign object is empty
   if (Object.keys(selectedCampaign).length === 0) {
-    return <p>Loading...</p>
+    return <p>Loading...</p>;
   }
+
+  const handleDonateClick = async () => {
+    if (!web3 || accounts.length === 0) {
+      if (window.ethereum) {
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+      }
+    }
+    setOpenDonate(true);
+};
 
   return (
     <div>
@@ -46,9 +61,13 @@ const CampaignDetails = () => {
         {Number(selectedCampaign.raised_amount).toLocaleString()}DC of {Number(selectedCampaign.goal_amount).toLocaleString()}DC
       </p>
       <p>{selectedCampaign.description}</p>
+
+      <button onClick={handleDonateClick}>Donate Now</button>
+      {openDonate && <DonationForm setOpen={setOpenDonate} />}
+
       <Link to={`/donationForm?id=${selectedCampaignId}`}><button>Donate Now</button></Link>
     </div>
-  )
-}
+  );
+};
 
-export default CampaignDetails
+export default CampaignDetails;

@@ -1,4 +1,4 @@
-import { utils } from 'web3';
+import { utils, BN } from 'web3';
 import erc20ABI from '../contracts/ABIs/erc20ABI'; // adjust the path to point to your erc20ABI.js file
 
 export const sendToken = async (web3, accounts, amount, recipient) => {
@@ -10,8 +10,8 @@ export const sendToken = async (web3, accounts, amount, recipient) => {
     const tokenContractAddress = process.env.REACT_APP_ERC20_CONTRACT_ADDRESS;
 
     // Convert the amount to the smallest unit of the token (often called "wei")
-    const amountInWei = utils.toWei(amount, 'ether');
-    const amountInDono = amountInWei / 1000000000000000000;
+    const amountInWei = new BN(utils.toWei(amount, 'ether'));
+    const amountInDono = amountInWei.div(new BN('1000000000000000000'));
 
     // Create a contract instance
     const contract = new web3.eth.Contract(erc20ABI, tokenContractAddress);
@@ -27,7 +27,7 @@ export const sendToken = async (web3, accounts, amount, recipient) => {
 
     try {
         // Call the contract's transfer function
-        const receipt = await contract.methods.transfer(recipient, amountInDono).send(transaction);
+        const receipt = await contract.methods.transfer(recipient, amountInDono.toString()).send(transaction);
         console.log('Transaction receipt:', receipt);
         return receipt;
     } catch (error) {
@@ -40,5 +40,4 @@ export const sendToken = async (web3, accounts, amount, recipient) => {
             // Don't re-throw the error
         }
     }
-    
 };

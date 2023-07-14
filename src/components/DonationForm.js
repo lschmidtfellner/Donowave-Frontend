@@ -2,6 +2,8 @@ import { Fragment, useRef, useState, useContext } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { HeartIcon } from '@heroicons/react/outline';
 import { Web3Context } from '../context/web3Context';
+import { useLocation} from 'react-router-dom';
+
 import { sendToken } from '../api/sendEther';
 import { createDonation } from '../api/donationService';
 import { CampaignContext } from '../context/campaignContextComponent';
@@ -9,13 +11,15 @@ import { AuthContext } from '../context/authContextComponent';
 
 export default function DonationForm({ setOpen }) {
     const { web3, accounts } = useContext(Web3Context);
-    const { selectedCampaignId } = useContext(CampaignContext);
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const selectedCampaignId = queryParams.get('id');    
     const { user } = useContext(AuthContext); // Call useContext at top level
     const [amount, setAmount] = useState('');
     const cancelButtonRef = useRef(null);
 
     const handleSubmit = async () => {
-        console.log('User:', user);
+        console.log('User:', user.user_id);
         console.log('CampaignContext:', CampaignContext);
         const numericAmount = Number(amount);
         if (!Number.isInteger(numericAmount) || numericAmount <= 0) {
@@ -41,7 +45,7 @@ export default function DonationForm({ setOpen }) {
             console.log('transactionHash:', receipt.transactionHash);
     
             await createDonation({
-                campaign: selectedCampaignId.toString(),
+                campaign: selectedCampaignId,
                 user: userId.toString(),
                 amount: numericAmount.toString(),
                 transaction_hash: receipt.transactionHash.toString()

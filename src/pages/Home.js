@@ -45,6 +45,7 @@ const Home = () => {
     highlightedIndex,
     getItemProps,
     inputValue,
+    reset,
   } = useCombobox({
     items,
     selectedItem,
@@ -71,7 +72,7 @@ const Home = () => {
   // Filtering campaigns based on selected item and category
   const filteredCampaigns = campaigns.filter(
     (campaign) =>
-      campaign.title.includes(selectedItem || "") &&
+      campaign.title.toLowerCase().includes(inputValue.toLowerCase() || "") &&
       (category ? campaign.category === category : true)
   );
 
@@ -79,6 +80,7 @@ const Home = () => {
   const handleReset = () => {
     setSelectedItem("");
     setCategory("");
+    reset()
   };
 
   // Downshift functionality ends here

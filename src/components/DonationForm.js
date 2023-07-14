@@ -2,7 +2,7 @@ import { Fragment, useRef, useState, useContext } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { HeartIcon } from '@heroicons/react/outline';
 import { Web3Context } from '../context/web3Context';
-import { sendEther } from '../api/sendEther';
+import { sendToken } from '../api/sendEther';
 
 export default function DonationForm({ setOpen }) {
     const { web3, accounts } = useContext(Web3Context);
@@ -17,7 +17,7 @@ export default function DonationForm({ setOpen }) {
         }
     
         const recipient = process.env.REACT_APP_METAMASK_ADDRESS;
-        await sendEther(web3, accounts, amount, recipient);
+        await sendToken(web3, accounts, amount, recipient);
         setOpen(false);
     };
     

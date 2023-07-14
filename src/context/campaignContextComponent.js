@@ -14,6 +14,7 @@ export const CampaignContextProvider = (props) => {
         const data = await getCampaigns()
         console.log('Response from server:', data)
         setCampaigns(data)
+        console.log('Campaigns set:', campaigns)
       } catch (error) {
         console.log(error)
       }
@@ -21,7 +22,6 @@ export const CampaignContextProvider = (props) => {
     
     fetchCampaigns()
   }, [])
-
 
   return (
     <CampaignContext.Provider value={{ campaigns, setCampaigns}}>

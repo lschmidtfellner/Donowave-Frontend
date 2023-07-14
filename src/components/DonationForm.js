@@ -5,14 +5,18 @@ import { Web3Context } from '../context/web3Context';
 import { sendToken } from '../api/sendEther';
 import { createDonation } from '../api/donationService';
 import { CampaignContext } from '../context/campaignContextComponent';
+import { AuthContext } from '../context/authContextComponent';
 
 export default function DonationForm({ setOpen }) {
     const { web3, accounts } = useContext(Web3Context);
     const { selectedCampaignId } = useContext(CampaignContext);
+    const { user } = useContext(AuthContext); // Call useContext at top level
     const [amount, setAmount] = useState('');
     const cancelButtonRef = useRef(null);
 
     const handleSubmit = async () => {
+        console.log('User:', user);
+        console.log('CampaignContext:', CampaignContext);
         const numericAmount = Number(amount);
         if (!Number.isInteger(numericAmount) || numericAmount <= 0) {
             alert('Please enter a positive whole number.');
@@ -28,7 +32,7 @@ export default function DonationForm({ setOpen }) {
         const recipient = process.env.REACT_APP_METAMASK_ADDRESS;
         const receipt = await sendToken(web3, accounts, amount, recipient);
         if (receipt && receipt.status) {
-            const userId = JSON.parse(localStorage.getItem('user')).id;
+            const userId = user.user_id;
     
             // Log the values here
             console.log('selectedCampaignId:', selectedCampaignId);
@@ -47,6 +51,7 @@ export default function DonationForm({ setOpen }) {
         }
         setOpen(false);
     };
+    
     
     
     return (

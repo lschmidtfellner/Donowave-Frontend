@@ -29,6 +29,13 @@ export default function DonationForm({ setOpen }) {
         const receipt = await sendToken(web3, accounts, amount, recipient);
         if (receipt && receipt.status) {
             const userId = JSON.parse(localStorage.getItem('user')).id;
+    
+            // Log the values here
+            console.log('selectedCampaignId:', selectedCampaignId);
+            console.log('userId:', userId);
+            console.log('numericAmount:', numericAmount);
+            console.log('transactionHash:', receipt.transactionHash);
+    
             await createDonation({
                 campaign: selectedCampaignId.toString(),
                 user: userId.toString(),

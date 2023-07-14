@@ -64,8 +64,6 @@ const CampaignDetails = () => {
 
       <button onClick={handleDonateClick}>Donate Now</button>
       {openDonate && <DonationForm setOpen={setOpenDonate} />}
-
-      <Link to={`/donationForm?id=${selectedCampaignId}`}><button>Donate Now</button></Link>
     </div>
   );
 };

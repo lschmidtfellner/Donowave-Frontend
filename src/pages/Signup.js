@@ -18,7 +18,7 @@ export default function Signup() {
         username,
         email,
         password,
-        userprofile: { metamask_wallet_address: walletAddress },
+        userprofile: { metamask_wallet_address: 'placeholder' },
       };
       await registerUser(registerData);
 
@@ -66,14 +66,6 @@ export default function Signup() {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-          />
-          <input
-            className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-8"
-            type="text"
-            name="walletAddress"
-            placeholder="Metamask Wallet Address"
-            value={walletAddress}
-            onChange={(e) => setWalletAddress(e.target.value)}
           />
           <div className="mb-8">
             <button

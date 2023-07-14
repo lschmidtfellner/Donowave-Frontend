@@ -1,5 +1,7 @@
 import { Fragment, useRef, useState, useContext } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+
 import { HeartIcon } from '@heroicons/react/outline';
 import { Web3Context } from '../context/web3Context';
 import { sendToken } from '../api/sendEther';
@@ -8,6 +10,8 @@ export default function DonationForm({ setOpen }) {
     const { web3, accounts } = useContext(Web3Context);
     const [amount, setAmount] = useState('');
     const cancelButtonRef = useRef(null);
+    const navigate = useNavigate();
+
 
     const handleSubmit = async () => {
         const numericAmount = Number(amount);

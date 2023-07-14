@@ -1,32 +1,33 @@
-import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { loginUser } from '../api/apiService';
-import { AuthContext } from '../context/authContextComponent';
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from "../api/apiService";
+import { AuthContext } from "../context/authContextComponent";
+import Swal from "sweetalert2";
 
 export default function Signin() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const { setIsLoggedIn, setUser } = useContext(AuthContext);
 
   async function handleSubmit(e) {
     e.preventDefault();
-  
+
     try {
       const loginData = { username, password };
       const response = await loginUser(loginData);
-  
+
       setUser(response);
       setIsLoggedIn(true);
-      localStorage.setItem('authToken', response.token);
-  
-      navigate('/');
+      localStorage.setItem("authToken", response.token);
+
+      navigate("/");
     } catch (error) {
-      console.error('Login failed:', error);
-      setErrorMessage('Invalid login credentials');
+      console.error("Login failed:", error);
+      setErrorMessage("Invalid login credentials");
     }
-  }  
+  }
 
   return (
     <div className="flex flex-1 flex-col justify-center px-6 lg:px-8 h-max">
@@ -61,7 +62,7 @@ export default function Signin() {
               Sign In
             </button>
             <span className="ml-2 mt-4 lg:w-1/6 md:w-1/6">
-              Not a user yet?{' '}
+              Not a user yet?{" "}
               <Link to="/signup" className="text-indigo-600 hover:text-black">
                 Sign Up
               </Link>

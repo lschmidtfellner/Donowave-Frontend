@@ -1,47 +1,23 @@
-
-import { Routes, Route } from 'react-router-dom';
-import React, { useContext, useEffect } from 'react';
-import categoryURLs from './data/categoryURLs';
-import { CampaignContext, CampaignContextProvider } from './context/campaignContextComponent';
-// import AuthContextComponent, {
-//   AuthContext
-// } from '/context/AuthContextComponent'
-import api from './api/apiConfig';
-import Nav from './components/Nav';
-import Signin from './pages/Signin';
-import Signup from './pages/Signup';
-import Home from './pages/Home';
-import CreateCampaign from './pages/CreateCampaign';
-import CampaignDetails from './pages/CampaignDetails';
-import DonationForm from './components/DonationForm';
-
+import { Routes, Route } from "react-router-dom";
+import React, { useContext } from "react";
+import { CampaignContextProvider } from "./context/campaignContextComponent";
+import AuthContextComponent, {
+  AuthContext,
+} from "./context/authContextComponent";
+import Nav from "./components/Nav";
+import Signin from "./pages/Signin";
+import Signup from "./pages/Signup";
+import Home from "./pages/Home";
+import CreateCampaign from "./pages/CreateCampaign";
+import CampaignDetails from "./pages/CampaignDetails";
+import DonationForm from "./components/DonationForm";
+import MyAccount from "./pages/MyAccount";
 
 function App() {
-  // return (
-  //   // <AuthContextComponent>
-  //   //   {' '}
-  //   //   {/* Use the AuthContextComponent to wrap the app */}
-  //   //   <AppContent />
-  //   // </AuthContextComponent>
-  // )
-  // }
-
-  // const AppContent = () => {
-  // const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext)
-  // // const navigate = useNavigate();
-  // const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   console.log("Logged in?", isLoggedIn);
-  //   console.log(isLoggedIn)
-  //   // if (!isLoggedIn) {
-  //   //   navigate('/auth/signin', { replace: true });
-  //   // }
-  // // }, [isLoggedIn, navigate]);
-  //   }, [isLoggedIn, navigate]);
+  const { isLoggedIn } = useContext(AuthContext);
 
   return (
-    <CampaignContextProvider>
+    <CampaignContextProvider value={{ isLoggedIn: false, setIsLoggedIn: () => {}, user: {}, setUser: () => {} }}>
       {/* <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> */}
       <Nav />
       <Routes>
@@ -50,20 +26,20 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route
           path="/create-campaign"
-          element={<CreateCampaign />}
-          // element={isLoggedIn ? <CreateCampaign /> : <Signin />}
+          // element={<CreateCampaign />}
+          element={isLoggedIn ? <CreateCampaign /> : <Signin />}
         />
         <Route
           path="/campaigns/details"
-          element={<CampaignDetails/>}
+          element={isLoggedIn ? <CampaignDetails /> : <Signin />}
         />
         <Route
           path="/donationForm"
-          element={<DonationForm/>}
+          element={isLoggedIn ? <DonationForm /> : <Signin />}
         />
         <Route
           path="/myaccount"
-          // element={isLoggedIn ? <MyAccount /> : <Signin />}
+          element={isLoggedIn ? <MyAccount /> : <Signin />}
         />
       </Routes>
     </CampaignContextProvider>

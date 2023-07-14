@@ -1,5 +1,6 @@
+
 import React, { useContext, useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import {
   campaignContextComponent,
   CampaignContext
@@ -9,6 +10,8 @@ import categoryURLs from '../data/categoryURLs';
 import { getCampaign } from '../api/campaignService';
 import DonationForm from '../components/DonationForm'; // import the DonationForm component
 import { Web3Context } from '../context/web3Context'; // import the Web3Context
+import dateInterpreter from '../data/dateInterpreter'
+
 
 const CampaignDetails = () => {
   const { campaigns } = useContext(CampaignContext);
@@ -53,13 +56,16 @@ const CampaignDetails = () => {
         }
       ></img>
       <h2>{selectedCampaign.title}</h2>
-      <p>{selectedCampaign.deadline}</p>
+      <p>{dateInterpreter(selectedCampaign.deadline)}</p>
       <p>
-        ${selectedCampaign.raised_amount} of ${selectedCampaign.goal_amount}
+        {Number(selectedCampaign.raised_amount).toLocaleString()}DC of {Number(selectedCampaign.goal_amount).toLocaleString()}DC
       </p>
       <p>{selectedCampaign.description}</p>
+
       <button onClick={handleDonateClick}>Donate Now</button>
       {openDonate && <DonationForm setOpen={setOpenDonate} />}
+
+      <Link to={`/donationForm?id=${selectedCampaignId}`}><button>Donate Now</button></Link>
     </div>
   );
 };

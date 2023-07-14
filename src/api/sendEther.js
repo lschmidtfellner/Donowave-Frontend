@@ -7,10 +7,11 @@ export const sendToken = async (web3, accounts, amount, recipient) => {
         return;
     }
 
-    const tokenContractAddress = process.env.REACT_APP_ERC20_CONTRACT_ADDRESS
+    const tokenContractAddress = process.env.REACT_APP_ERC20_CONTRACT_ADDRESS;
 
     // Convert the amount to the smallest unit of the token (often called "wei")
     const amountInWei = utils.toWei(amount, 'ether');
+    const amountInDono = amountInWei / 1000000000000000000;
 
     // Create a contract instance
     const contract = new web3.eth.Contract(erc20ABI, tokenContractAddress);
@@ -26,11 +27,18 @@ export const sendToken = async (web3, accounts, amount, recipient) => {
 
     try {
         // Call the contract's transfer function
-        const receipt = await contract.methods.transfer(recipient, amountInWei).send(transaction);
+        const receipt = await contract.methods.transfer(recipient, amountInDono).send(transaction);
         console.log('Transaction receipt:', receipt);
         return receipt;
     } catch (error) {
-        console.error('Error sending tokens', error);
-        throw error;
+        // Handle the error here
+        if (error.code === 4001) {
+            // User rejected transaction
+            alert('Transaction was rejected by the user.');
+        } else {
+            console.error('Error sending tokens', error);
+            // Don't re-throw the error
+        }
     }
+    
 };

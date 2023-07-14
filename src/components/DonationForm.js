@@ -10,6 +10,12 @@ export default function DonationForm({ setOpen }) {
     const cancelButtonRef = useRef(null);
 
     const handleSubmit = async () => {
+        const numericAmount = Number(amount);
+        if (!Number.isInteger(numericAmount) || numericAmount <= 0) {
+            alert('Please enter a positive whole number.');
+            return;
+        }
+
         console.log(`Submitting amount: ${amount}`);
         if (!web3 || accounts.length === 0) {
             alert('Please connect to MetaMask.');
@@ -55,14 +61,16 @@ export default function DonationForm({ setOpen }) {
                       <div className="mt-2">
                         <input
                           type="number"
-                          min="0"
+                          min="1"
+                          step="1"
                           className="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                           value={amount}
                           onChange={(e) => {
-                            if (e.target.value >= 0) {
-                              setAmount(e.target.value);
+                            const value = e.target.value;
+                            if (value === '' || (Number.isInteger(Number(value)) && value >= 1)) {
+                                setAmount(value);
                             }
-                          }}
+                        }}
                           placeholder="Enter amount"
                         />
                       </div>
@@ -90,5 +98,5 @@ export default function DonationForm({ setOpen }) {
             </div>
           </Dialog>
         </Transition.Root>
-      );
-    }
+    );
+}

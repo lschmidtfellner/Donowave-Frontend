@@ -1,5 +1,5 @@
 import { ethers } from 'ethers';
-import erc20ABI from '../contracts/ABIs/erc20ABI'; 
+import erc20ABI from '../contracts/ABIs/erc20ABI';
 
 export const sendToken = async (provider, signer, amount, recipient) => {
     if (!provider || !signer) {

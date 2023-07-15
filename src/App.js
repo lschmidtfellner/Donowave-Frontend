@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import React, { useContext } from "react";
 import { CampaignContextProvider } from "./context/campaignContextComponent";
-import AuthContextComponent, {
+import  {
   AuthContext,
 } from "./context/authContextComponent";
 import Nav from "./components/Nav";

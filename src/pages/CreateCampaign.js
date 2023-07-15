@@ -60,7 +60,7 @@ const CreateCampaign = () => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
       postCampaignData()
     }
-  }, [errors])
+  })
 
   const postCampaignData = async () => {
     try {

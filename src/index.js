@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import AuthContextComponent, { AuthContext } from './context/authContextComponent';
+import AuthContextComponent from './context/authContextComponent';
 import { Web3ContextProvider } from './context/web3Context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

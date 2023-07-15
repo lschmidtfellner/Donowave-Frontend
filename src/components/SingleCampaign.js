@@ -7,6 +7,7 @@ const SingleCampaign = ({ campaign }) => (
   <Link to={`/campaigns/details?id=${campaign.id}`}>
     <div>
       <img
+        alt="placeholder"
         src={
           categoryURLs.find((catObj) => catObj.category === campaign.category)
             .url

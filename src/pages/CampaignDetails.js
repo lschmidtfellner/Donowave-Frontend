@@ -1,11 +1,10 @@
 
 import React, { useContext, useState, useEffect } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import {
-  campaignContextComponent,
   CampaignContext
 } from '../context/campaignContextComponent';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 import categoryURLs from '../data/categoryURLs';
 import { getCampaign } from '../api/campaignService';
 import DonationForm from '../components/DonationForm'; // import the DonationForm component
@@ -31,7 +30,7 @@ const CampaignDetails = () => {
       };
       fetchCampaign();
     }
-  }, [selectedCampaignId]);
+  }, [selectedCampaignId, campaigns]);
 
   // Check if the selectedCampaign object is empty
   if (Object.keys(selectedCampaign).length === 0) {
@@ -50,6 +49,7 @@ const CampaignDetails = () => {
   return (
     <div>
       <img
+        alt='whatever'
         src={
           categoryURLs.find((catObj) => catObj.category === selectedCampaign.category)
             .url

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { registerUser } from '../api/apiService';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 
 export default function Signup() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [walletAddress, setWalletAddress] = useState('');
+  // const [walletAddress, setWalletAddress] = useState('');
   const [signupSuccess, setSignupSuccess] = useState(false);
   const navigate = useNavigate();
 

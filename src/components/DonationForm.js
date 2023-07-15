@@ -1,6 +1,6 @@
 import { Fragment, useRef, useState, useContext } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { HeartIcon } from '@heroicons/react/outline';
+// import { HeartIcon } from '@heroicons/react/outline';
 import { Web3Context } from '../context/web3Context';
 import { useLocation} from 'react-router-dom';
 

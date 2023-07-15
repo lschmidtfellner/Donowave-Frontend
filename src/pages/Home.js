@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
 import { useCombobox } from "downshift";
 import SingleCampaign from "../components/SingleCampaign";
 import { CampaignContext } from "../context/campaignContextComponent";
@@ -27,7 +26,7 @@ const Home = () => {
     };
 
     fetchCampaigns();
-  }, []);
+  }, [setCampaigns]);
 
   // Map the campaigns to an array of titles
   const items = campaigns.map((campaign) => campaign.title);

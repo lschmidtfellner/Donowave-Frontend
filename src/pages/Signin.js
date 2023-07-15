@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../api/apiService";
 import { AuthContext } from "../context/authContextComponent";
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
 
 export default function Signin() {
   const [username, setUsername] = useState("");

@@ -7,4 +7,9 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  purge: [
+    './src/**/*.html',
+    './src/**/*.jsx',
+    './src/**/*.js',
+  ],
 }

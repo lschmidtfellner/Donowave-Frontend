@@ -1,4 +1,4 @@
-import { ethers } from 'ethers';
+import { ethers, utils } from 'ethers';
 import erc20ABI from '../contracts/ABIs/erc20ABI'; // adjust the path to point to your erc20ABI.js file
 
 export const sendToken = async (provider, signer, amount, recipient) => {
@@ -10,7 +10,7 @@ export const sendToken = async (provider, signer, amount, recipient) => {
     const tokenContractAddress = process.env.REACT_APP_ERC20_CONTRACT_ADDRESS;
 
     // Convert the amount to the smallest unit of the token (often called "wei")
-    const amountInWei = ethers.utils.parseEther(amount);
+    const amountInWei = utils.parseEther(amount);
 
     // Create a contract instance
     const contract = new ethers.Contract(tokenContractAddress, erc20ABI, signer);

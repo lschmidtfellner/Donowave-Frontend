@@ -1,26 +1,33 @@
 import { Fragment, useRef, useState, useContext } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-
 import { HeartIcon } from '@heroicons/react/outline';
 import { Web3Context } from '../context/web3Context';
+import { useLocation} from 'react-router-dom';
+
 import { sendToken } from '../api/sendEther';
+import { createDonation } from '../api/donationService';
+import { CampaignContext } from '../context/campaignContextComponent';
+import { AuthContext } from '../context/authContextComponent';
 
 export default function DonationForm({ setOpen }) {
     const { web3, accounts } = useContext(Web3Context);
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const selectedCampaignId = queryParams.get('id');    
+    const { user } = useContext(AuthContext); // Call useContext at top level
     const [amount, setAmount] = useState('');
     // const [open, setOpen] = useState(true);
     const cancelButtonRef = useRef(null);
-    const navigate = useNavigate();
-
 
     const handleSubmit = async () => {
+        console.log('User:', user.user_id);
+        console.log('CampaignContext:', CampaignContext);
         const numericAmount = Number(amount);
         if (!Number.isInteger(numericAmount) || numericAmount <= 0) {
             alert('Please enter a positive whole number.');
             return;
         }
-
+    
         console.log(`Submitting amount: ${amount}`);
         if (!web3 || accounts.length === 0) {
             alert('Please connect to MetaMask.');
@@ -28,25 +35,45 @@ export default function DonationForm({ setOpen }) {
         }
     
         const recipient = process.env.REACT_APP_METAMASK_ADDRESS;
-        await sendToken(web3, accounts, amount, recipient);
+        const receipt = await sendToken(web3, accounts, amount, recipient);
+        if (receipt && receipt.status) {
+            const userId = user.user_id;
+    
+            // Log the values here
+            console.log('selectedCampaignId:', selectedCampaignId);
+            console.log('userId:', userId);
+            console.log('numericAmount:', numericAmount);
+            console.log('transactionHash:', receipt.transactionHash);
+    
+            await createDonation({
+                campaign: selectedCampaignId,
+                user: userId.toString(),
+                amount: numericAmount.toString(),
+                transaction_hash: receipt.transactionHash.toString()
+            });
+        } else {
+            console.error('Transaction failed:', receipt);
+        }
         setOpen(false);
     };
     
+    
+    
     return (
         <Transition.Root show={true} as={Fragment}>
-          <Dialog as="div" static className="fixed inset-0 overflow-y-auto" initialFocus={cancelButtonRef} onClose={() => setOpen(false)}>
-            <div className="flex items-center justify-center min-h-screen">
-              <Transition.Child
-                as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0"
-                enterTo="opacity-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
-              >
-                <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-              </Transition.Child>
+            <Dialog as="div" static className="fixed inset-0 overflow-y-auto" initialFocus={cancelButtonRef} onClose={() => setOpen(false)}>
+                <div className="flex items-center justify-center min-h-screen">
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                    >
+                        <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                    </Transition.Child>
     
               <Transition.Child
                 as={Fragment}
@@ -99,9 +126,7 @@ export default function DonationForm({ setOpen }) {
                     </div>
                   </Dialog.Panel>
                 </div>
-              </Transition.Child>
-            </div>
-          </Dialog>
+            </Dialog>
         </Transition.Root>
     );
 }

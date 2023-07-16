@@ -12,14 +12,19 @@ export function Web3ContextProvider({ children }) {
             window.ethereum.request({ method: 'eth_requestAccounts' }).then((accounts) => {
                 const web3Instance = new Web3(window.ethereum);
                 setWeb3(web3Instance);
+                console.log('Web3 instance set:', web3Instance);
                 setAccounts(accounts);
+                console.log('Accounts set:', accounts);
             });
 
             window.ethereum.on('accountsChanged', function (accounts) {
                 setAccounts(accounts);
+                console.log('Accounts updated:', accounts);
             });
         } else if (window.web3) {
-            setWeb3(new Web3(window.web3.currentProvider));
+            const web3Instance = new Web3(window.web3.currentProvider);
+            setWeb3(web3Instance);
+            console.log('Web3 instance set:', web3Instance);
         } else {
             console.log('No Ethereum browser extension detected, install MetaMask!');
         }

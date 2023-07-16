@@ -18,7 +18,7 @@ export default function Signup() {
         username,
         email,
         password,
-        userprofile: { metamask_wallet_address: walletAddress },
+        userprofile: { metamask_wallet_address: 'placeholder' },
       };
       await registerUser(registerData);
 
@@ -84,6 +84,7 @@ export default function Signup() {
          
           <div className="mb-8 flex flex-col items-center justify-center">
             <button 
+
               type="submit"
               className="aqua rounded-full lg:w-1/6 md:w-1/6 py-2 w-1/3 text-white font-bold  hover:text-black mt-4 text-xs"
             >

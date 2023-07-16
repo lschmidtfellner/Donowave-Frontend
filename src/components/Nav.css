@@ -1,0 +1,39 @@
+/* Nav animation and Media Queries...*/
+
+.sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Adjust the z-index as needed */
+  }
+
+  .sticky-nav:not(.navbar) {
+    opacity: 0.8;
+    height: 5rem;
+  }
+
+
+  /* @keyframes header {
+    0% {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+} */
+
+
+  
+/* .header {
+    height: var(--nav-height);
+    z-index: 5000;
+    background-color: black;
+    transition-property: transform,opacity;
+    transition-duration: .45s;
+    transition-timing-function: cubic-bezier(.215,.61,.355,1);
+} */
+
+.navbar{ 
+    opacity: 1 !important;
+}
+

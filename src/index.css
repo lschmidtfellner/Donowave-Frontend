@@ -1,23 +1,41 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+
 
 :root {
-  --yellow: #ffff33;
-  --blue: #079BF5;
-  --blue-bg:#079BF5;
-  --pink: #FB48C4;
-  --pink-bg: #FB48C4;
+  --aqua: #00D1F2;
+  --lavender: #BA8FFF;
   
 }
 
+.aqua {
+  background-color: var(--aqua);
+}
+
+.text-aqua {
+  color: var(--aqua);
+}
+
+.border-aqua {
+  border: 1px solid var(--aqua);
+}
+
+.lavender {
+  background-color: var(--lavender);
+}
+
+#root {
+  background-color: rgba(186, 143, 255, 0.18);
+}
 
 body {
   margin: 0;
-  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif; */
-  font-family: 'Prompt', sans-serif;
+  /* padding: 0;
+  overflow: hidden; */
+  font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -27,25 +45,24 @@ html, body {
   width: 100vw;
 }
 
-img, video {
-  max-width: 75%;
-  height: auto;
-}
-
 p, a {
-  font-family: 'Prompt', sans-serif;
+  font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+a, li {
+  cursor: pointer;
+}
+
 ::target-text, div {
-  font-family: 'Prompt', sans-serif;
+  font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; 
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 code {
@@ -53,41 +70,18 @@ code {
     monospace;
 }
 
-.blue-bg {
-  background-color: var(--blue-bg);
-}
-
-.yellow {
-  background-color: var(--yellow);
-}
-
-.blue {
-  color: var(--blue);
-}
-
-.pink {
-  color: var(--pink);
-}
-
-.pink-bg {
-  background-color: var(--pink-bg);
-}
-
-svg {
-  fill: white;
-}
 
 select.blue, select.blue:focus, select.blue:active, select.blue:focus-visible {
-  border: 1px solid var(--blue);
+  border: 0px;
   padding: 0 1rem;
 }
 
 div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
-  border: 0 !important;
-  border-radius: 2rem !important;
+  border: 0px !important;
+  border-radius: 50% !important;
   /* padding: 0.25rem !important; */
   background: initial !important;
-  background-color: var(--pink-bg) !important;
+  background-color: var(--aqua) !important;
   color: #fff;
   font-weight: bold !important;
   font-size: 1em;
@@ -96,14 +90,14 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
 div:where(.swal2-container) h2:where(.swal2-title) {
   position: relative;
   max-width: 100%;
-  padding: 0 !important;
+  padding: 1rem !important;
   color: inherit;
   font-size: 16px !important;
   font-weight: normal !important;
   text-align: center !important;
   text-transform: none;
   word-wrap: break-word;
-  font-family: 'Prompt', sans-serif !important;
+  font-family: 'Poppins', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -114,9 +108,15 @@ div:where(.swal2-container).swal2-top, div:where(.swal2-container).swal2-center,
 }
 
 
-@media only screen and (min-width: 960px) {
+/* Home, Campaign Details, MyAccount */
+.campaignFeed img {
+  width: 25%;
+}
+
+
+/* @media only screen and (min-width: 960px) {
   img, video {
     max-width: 25% !important;
     height: auto;
-  }
-}
+  } */
+/* } */

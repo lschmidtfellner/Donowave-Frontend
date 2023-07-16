@@ -12,6 +12,8 @@ import CreateCampaign from "./pages/CreateCampaign";
 import CampaignDetails from "./pages/CampaignDetails";
 import DonationForm from "./components/DonationForm";
 import MyAccount from "./pages/MyAccount";
+import About from "./pages/About";
+// import BackgroundAnimation from './components/BackgroundAnimation';
 
 function App() {
   const { isLoggedIn } = useContext(AuthContext);
@@ -24,6 +26,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
         <Route
           path="/create-campaign"
           // element={<CreateCampaign />}
@@ -43,7 +46,9 @@ function App() {
         />
       </Routes>
     </CampaignContextProvider>
+   
   );
 }
 
 export default App;
+// ReactDOM.render(<App />, document.getElementById('root'));

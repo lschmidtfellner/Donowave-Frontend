@@ -45,26 +45,42 @@ const CampaignDetails = () => {
       }
     }
     setOpenDonate(true);
-};
+  };
 
   return (
-    <div>
-      <img
-        src={
-          categoryURLs.find((catObj) => catObj.category === selectedCampaign.category)
-            .url
-        }
-      ></img>
-      <h2>{selectedCampaign.title}</h2>
-      <p>{dateInterpreter(selectedCampaign.deadline)}</p>
-      <p>
-        {Number(selectedCampaign.raised_amount).toLocaleString()}DC of {Number(selectedCampaign.goal_amount).toLocaleString()}DC
-      </p>
-      <p>{selectedCampaign.description}</p>
+    <div className="campaignFeed w-10/12 mt-8 mx-auto">
+      <div className="bg-white rounded-md mb-8 p-4 shadow">
+        <div className="flex flex-col p-4">
+          <div className="flex justify-center items-center">
+            <img
+              src={
+                categoryURLs.find((catObj) => catObj.category === selectedCampaign.category)
+                  .url
+              } className="w-1/4"
+            ></img>
+            <h2 className="font-bold text-black ml-4">{selectedCampaign.title}</h2>
+          </div>
+          <div className="text-left mt-4 text-base">
+            <p>{selectedCampaign.description}</p>
+          </div>
+          <div className="text-left mt-4">
+            <label className="font-bold text-xs">RAISED AMOUNT:</label>
+            <p>
+              {Number(selectedCampaign.raised_amount).toLocaleString()}DC of {Number(selectedCampaign.goal_amount).toLocaleString()}DC
+            </p>
+          </div>
+          <div className="text-left mt-4">
+            <label className="font-bold text-xs">DEADLINE:</label>
+            <p>{dateInterpreter(selectedCampaign.deadline)}</p>
+          </div>
 
-      <button onClick={handleDonateClick}>Donate Now</button>
-      {openDonate && <DonationForm setOpen={setOpenDonate} />}
-    </div>
+          {/* <button onClick={handleDonateClick} className="lavender rounded-full lg:w-1/6 md:w-1/6 py-2 w-1/3 text-white font-bold  hover:text-black mt-4 text-xs">Donate Now</button>
+      {openDonate && <DonationForm setOpen={setOpenDonate} />} */}
+          <div className="text-center mt-4">
+            <Link to={`/donationForm?id=${selectedCampaignId}`}><button className="lavender rounded-full lg:w-1/6 md:w-1/6 py-2 w-1/2 text-white font-bold hover:text-black mt-4 text-xs">Donate Now</button></Link>
+          </div>
+        </div>
+      </div>
   );
 };
 

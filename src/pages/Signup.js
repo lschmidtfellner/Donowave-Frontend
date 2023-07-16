@@ -24,60 +24,77 @@ export default function Signup() {
 
       setSignupSuccess(true);
       setTimeout(() => {
-        navigate('/signin');
-      }, 2000);
+        window.location.reload()
+    }, 2000)
+    Swal.fire({
+        icon: 'success',
+        title: "You have successfully signed up!"
+    }).then(() => {
+      navigate('/signin');
+    });
     } catch (error) {
       console.error('Registration failed:', error);
     }
   }
 
   return (
-    <div className="flex flex-1 flex-col justify-center px-6 lg:px-8 h-max">
+    <div className="flex flex-1 flex-col justify-center px-6 lg:px-8 h-max bg-white">
       <form onSubmit={handleSubmit} className="placeholder:">
-        <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-indigo-600 mt-16 mb-10">
-          Create an account
+        <h2 className="text-left text-3xl font-bold leading-9 tracking-tight text-black mt-16 mb-10 ml-8">
+          Sign up
         </h2>
         {signupSuccess && (
           <p className="text-green-500">
             Signup successful! Redirecting to signin page...
           </p>
         )}
-        <div className="lg:w-2/5 md:w-2/5 w-full mx-auto">
+        <div className="lg:w-2/5 md:w-2/5 w-11/12 ml-4">
+          <label className="font-bold text-xs ml-4">USERNAME</label>
           <input
-            className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            className="block w-full rounded-full border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 mt-1 mb-8"
             type="text"
             name="username"
-            placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
+          <label className="font-bold text-xs ml-4">EMAIL</label>
           <input
-            className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-8"
+            className="block w-full rounded-full border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 mt-1 mb-8"
             type="email"
             name="email"
-            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          <label className="font-bold text-xs ml-4">PASSWORD</label>
           <input
-            className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-8"
+            className="block w-full rounded-full border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 mt-1 mb-8"
             type="password"
             name="password"
-            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <div className="mb-8">
-            <button
+          <label className="font-bold text-xs ml-4">METAMASK WALLET</label>
+          <input
+            className="block w-full rounded-full border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 mt-1 mb-8"
+            type="text"
+            name="walletAddress"
+            value={walletAddress}
+            onChange={(e) => setWalletAddress(e.target.value)}
+          />
+         
+          <div className="mb-8 flex flex-col items-center justify-center">
+            <button 
+
               type="submit"
-              className="rounded-full pink-bg w- lg:w-1/6 md:w-1/6 py-2 w-1/3  text-white font-bold  hover:text-black mt-4"
+              className="aqua rounded-full lg:w-1/6 md:w-1/6 py-2 w-1/3 text-white font-bold  hover:text-black mt-4 text-xs"
             >
-              Signup
+              SIGN UP
             </button>
-            <span className="ml-2 mt-4 lg:w-1/6 md:w-1/6">
-              Already a user?{' '}
-              <Link to="/signin" className="text-indigo-600 hover:text-black">
-                Signin
+            <br></br>
+            <span className="ml-2 lg:w-1/6 md:w-1/6">
+              Already a user?{" "}
+              <Link to="/signin" className="text-aqua hover:text-black text-sm font-bold">
+                Sign In
               </Link>
             </span>
           </div>

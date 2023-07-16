@@ -16,6 +16,7 @@ export default function DonationForm({ setOpen }) {
     const selectedCampaignId = queryParams.get('id');    
     const { user } = useContext(AuthContext); // Call useContext at top level
     const [amount, setAmount] = useState('');
+    // const [open, setOpen] = useState(true);
     const cancelButtonRef = useRef(null);
 
     const handleSubmit = async () => {
@@ -74,58 +75,56 @@ export default function DonationForm({ setOpen }) {
                         <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
                     </Transition.Child>
     
-                    <Transition.Child
-                        as={Fragment}
-                        enter="ease-out duration-300"
-                        enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                        enterTo="opacity-100 translate-y-0 sm:scale-100"
-                        leave="ease-in duration-200"
-                        leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-                        leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                    >
-                        <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                            <Dialog.Panel>
-                                <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                                    <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
-                                        Donate Today!
-                                    </Dialog.Title>
-                                    <div className="mt-2">
-                                        <input
-                                            type="number"
-                                            min="1"
-                                            step="1"
-                                            className="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                            value={amount}
-                                            onChange={(e) => {
-                                                const value = e.target.value;
-                                                if (value === '' || (Number.isInteger(Number(value)) && value >= 1)) {
-                                                    setAmount(value);
-                                                }
-                                            }}
-                                            placeholder="Enter amount"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                                    <button
-                                        type="button"
-                                        className="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-full shadow-sm text-base font-semibold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
-                                        onClick={handleSubmit}
-                                    >
-                                        Submit
-                                    </button>
-                                    <button
-                                        type="button"
-                                        className="mt-3 w-full inline-flex justify-center rounded-full border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-semibold text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
-                                        onClick={() => setOpen(false)}
-                                        ref={cancelButtonRef}
-                                    >
-                                        Cancel
-                                    </button>
-                                </div>
-                            </Dialog.Panel>
-                        </div>
-                    </Transition.Child>
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                enterTo="opacity-100 translate-y-0 sm:scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              >
+                <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all w-11/12 h-64">
+                  <Dialog.Panel>
+                    <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 text-left">
+                      <Dialog.Title as="h2" className="text-left text-3xl font-bold leading-9 tracking-tight text-black mb-8 ml-2">
+                      Make a Donation
+                      </Dialog.Title>
+                      <div className="mt-2">
+                        <input
+                          type="number"
+                          min="1"
+                          step="1"
+                          value={amount}
+                          onChange={(e) => {
+                            const value = e.target.value;
+                            if (value === '' || (Number.isInteger(Number(value)) && value >= 1)) {
+                                setAmount(value);
+                            }
+                        }}
+                          placeholder="Enter amount"
+                          className="block w-full rounded-full border-0 py-1.5 pl-4 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 mt-1 mb-8"
+                        />
+                      </div>
+                    </div>
+                    <div className="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse text-center">
+                      <button
+                        type="button"
+                        className="aqua rounded-full lg:w-1/6 md:w-1/6 py-2 w-1/3 mr-8 text-white font-bold  hover:text-black mt-4 text-xs"
+                        onClick={handleSubmit}
+                      >
+                        Submit
+                      </button>
+                      <button
+                        type="button"
+                        className="bg-white text-aqua border-aqua rounded-full lg:w-1/6 md:w-1/6 py-2 w-1/3 font-bold  hover:text-black mt-4 text-xs"
+                        onClick={() => setOpen(false)}
+                        ref={cancelButtonRef}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </Dialog.Panel>
                 </div>
             </Dialog>
         </Transition.Root>

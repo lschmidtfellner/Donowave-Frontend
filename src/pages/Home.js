@@ -6,6 +6,7 @@ import { CampaignContext } from "../context/campaignContextComponent";
 import { getCampaigns } from "../api/campaignService";
 import categoryURLs from "../data/categoryURLs";
 
+
 const Home = () => {
   const { campaigns, setCampaigns } = useContext(CampaignContext);
   const [category, setCategory] = useState("");
@@ -84,60 +85,118 @@ const Home = () => {
   // Downshift functionality ends here
   // Below is the rendering part of this component
 
+  //   return (
+  //     <>
+  //       {/* // Here we provide a search input and a button to toggle the dropdown */}
+  //       <div className="flex flex-col items-center mt-8 w-full mx-auto max-w-screen-lg">
+  //       <div className="w-full mb-8">
+  //       <div className="w-full mb-8 text-left">
+  //       <label {...getLabelProps()} className="font-bold text-xs">SEARCH:</label><br></br>
+  //         <input {...getInputProps()} className="w-3/4 mx-auto rounded-full border-0 py-1.5 pl-5 pr-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-xs leading-6 mt-1 mb-8" placeholder="SEARCH FOR CAMPAIGN TITLE"
+  //         />
+  //         <button {...getToggleButtonProps()} aria-label="toggle menu" />
+  //         </div>
+  //       </div>
+
+  //       {/* The dropdown menu */}
+  //       <ul {...getMenuProps()} className="bg-white shadow-md rounded h-full">
+  //         {/* Show dropdown menu only when it's open and user has typed something */}
+  //         {isOpen &&
+  //           inputValue &&
+  //           filteredItems.map((item, index) => {
+  //             const itemIndex = items.indexOf(item); // get the original index of the item
+  //             return (
+  //               // Generate each dropdown item
+  //               <li
+  //                 key={item}
+  //                 {...getItemProps({ index: itemIndex, item })}
+  //                 className={`${
+  //                   highlightedIndex === itemIndex ? 'bg-gray-200' : ''
+  //                 } ${selectedItem === item ? 'font-bold' : ''} p-1`}
+  //               >
+  //                 {item}
+  //               </li>
+  //             );
+  //           })}
+  //       </ul>
+
+  //       {/* // The category filter dropdown */}
+  //       <select value={category} onChange={handleCategoryChange} className="font-bold text-xs ml-4">
+  //         <option value="">All Categories</option>
+  //         {categoryURLs.map((cat, index) => (
+  //           <option key={index} value={cat.category}>
+  //             {cat.full_name}
+  //           </option>
+  //         ))}
+  //       </select>
+
+  //       <button
+  //         onClick={handleReset}
+  //         className="lavender rounded-full lg:w-1/6 md:w-1/6 py-2 w-1/3 text-white font-bold  hover:text-black mt-4 text-xs"
+  //       >
+  //         reset
+  //       </button>
+  //       </div>
+  //     <div className="w-11/12">
+  //       {/* // Here we render the filtered campaigns */}
+  //       {filteredCampaigns.map((campaign) => (
+  //         <SingleCampaign key={campaign.id} campaign={campaign} />
+  //       ))}
+  //     </div>
+  //     </>
+  //   );
+  // };
+
+  // export default Home;
+
+
+
   return (
-    <div>
-      {/* // Here we provide a search input and a button to toggle the dropdown */}
-      <label {...getLabelProps()}>Search campaigns</label>
-      <div>
-        <input {...getInputProps()} />
-        <button {...getToggleButtonProps()} aria-label="toggle menu" />
+    <div className="flex flex-col items-center mt-8 w-full mx-auto max-w-screen-lg z-50">
+      <div className="w-10/12 mt-4 bg-white rounded-md py-8">
+        <div className="w-full text-center">
+          {/* <label {...getLabelProps()} className="font-bold text-xs">SEARCH:</label> */}
+          <input {...getInputProps()} className="block w-3/4 mx-auto rounded-full border-0 py-1.5 pl-5 pr-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-black placeholder:font-bold focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-xs leading-6 mt-1" placeholder="SEARCH FOR CAMPAIGN TITLE" />
+          <button {...getToggleButtonProps()} aria-label="toggle menu" />
+        </div>
+
+        <div className="w-full text-center">
+          <select value={category} onChange={handleCategoryChange} className="w-3/4 mx-auto font-bold text-xs bg-white rounded-full border-0 py-1.5 pl-5 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 leading-6 mt-1 mb-2">
+            <option value="" className="font-bold text-xs">ALL CATEGORIES</option>
+            {categoryURLs.map((cat, index) => (
+              <option key={index} value={cat.category}>
+                {cat.full_name}
+              </option>
+            ))}
+          </select>
+
+          <button onClick={handleReset} className="lavender rounded-full lg:w-1/6 md:w-1/6 py-2 w-1/3 text-white font-bold  hover:text-black mt-4 text-xs">
+            RESET
+          </button>
+        </div>
+
+        <ul {...getMenuProps()} className="bg-white shadow-md rounded h-full">
+          {isOpen &&
+            inputValue &&
+            filteredItems.map((item, index) => {
+              const itemIndex = items.indexOf(item);
+              return (
+                <li key={item} {...getItemProps({ index: itemIndex, item })} className={`${highlightedIndex === itemIndex ? 'bg-gray-200' : ''
+                  } ${selectedItem === item ? 'font-bold' : ''} p-1`}>
+                  {item}
+                </li>
+              );
+            })}
+        </ul>
       </div>
 
-      {/* The dropdown menu */}
-      <ul {...getMenuProps()}>
-        {/* Show dropdown menu only when it's open and user has typed something */}
-        {isOpen &&
-          inputValue &&
-          filteredItems.map((item, index) => {
-            const itemIndex = items.indexOf(item); // get the original index of the item
-            return (
-              // Generate each dropdown item
-              <li
-                key={item}
-                {...getItemProps({ index: itemIndex, item })}
-                style={{
-                  backgroundColor:
-                    highlightedIndex === itemIndex ? "lightgray" : "white",
-                  fontWeight: selectedItem === item ? "bold" : "normal",
-                }}
-              >
-                {item}
-              </li>
-            );
-          })}
-      </ul>
-
-      {/* // The category filter dropdown */}
-      <select value={category} onChange={handleCategoryChange}>
-        <option value="">All Categories</option>
-        {categoryURLs.map((cat, index) => (
-          <option key={index} value={cat.category}>
-            {cat.full_name}
-          </option>
+      <div className="campaignFeed w-10/12 mt-8">
+        {filteredCampaigns.map((campaign) => (
+          <div className="bg-white rounded-md mb-8 p-4 shadow">
+            <SingleCampaign key={campaign.id} campaign={campaign} />
+          </div>
         ))}
-      </select>
-
-      <button
-        onClick={handleReset}
-        className="rounded-full pink-bg lg:w-1/6 md:w-1/6 py-1 w-1/3  text-white font-bold  hover:text-black mt-4"
-      >
-        reset
-      </button>
-
-      {/* // Here we render the filtered campaigns */}
-      {filteredCampaigns.map((campaign) => (
-        <SingleCampaign key={campaign.id} campaign={campaign} />
-      ))}
+      </div>
     </div>
   );
 };

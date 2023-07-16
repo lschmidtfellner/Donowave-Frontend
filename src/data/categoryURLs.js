@@ -1,103 +1,123 @@
 const categoryURLs = [
   {
     category: 'AN',
-    url: 'https://i.imgur.com/I7mSjHT.jpg',
-    full_name: 'Animals'
+    url: 'https://i.imgur.com/HjdBnVk.png',
+    full_name: 'Animals',
+    hex: 'BA8FFF'
   },
   {
     category: 'BU',
-    url: 'https://i.imgur.com/TOzMtuT.jpg',
-    full_name: 'Business'
+    url: 'https://i.imgur.com/3wpIqNY.png',
+    full_name: 'Business',
+    hex: 'F7B57F'
   },
   {
     category: 'CO',
-    url: 'https://i.imgur.com/18scva4.jpg',
-    full_name: 'Community'
+    url: 'https://i.imgur.com/ptpkdl8.png',
+    full_name: 'Community',
+    hex: 'DD76B3'
   },
   {
     category: 'CR',
-    url: 'https://i.imgur.com/82CvzQp.jpg',
-    full_name: 'Creative'
+    url: 'https://i.imgur.com/WlPHSH2.png',
+    full_name: 'Creative',
+    hex: 'C782D8'
   },
   {
     category: 'ED',
-    url: 'https://i.imgur.com/GKsBSbG.jpg',
-    full_name: 'Education'
+    url: 'https://i.imgur.com/6fKsjb1.png',
+    full_name: 'Education',
+    hex: 'F49E7F'
   },
   {
     category: 'EM',
-    url: 'https://i.imgur.com/tmOAdme.jpg',
-    full_name: 'Emergencies'
+    url: 'https://i.imgur.com/V4nA7VZ.png',
+    full_name: 'Emergencies',
+    hex: 'D3746C'
   },
   {
     category: 'EN',
-    url: 'https://i.imgur.com/sGHzKIw.jpg',
-    full_name: 'Environment'
+    url: 'https://i.imgur.com/e6bDdUv.png',
+    full_name: 'Environment',
+    hex: 'A7E082'
   },
   {
     category: 'EV',
-    url: 'https://i.imgur.com/Fu8CEMA.jpg',
-    full_name: 'Events'
+    url: 'https://i.imgur.com/hTgxI0f.png',
+    full_name: 'Events',
+    hex: '89D384'
   },
   {
     category: 'FA',
-    url: 'https://i.imgur.com/zwRbVfc.jpg',
-    full_name: 'Faith'
+    url: 'https://i.imgur.com/HjGiI2l.png',
+    full_name: 'Faith',
+    hex: '74B7D1'
   },
   {
     category: 'FM',
-    url: 'https://i.imgur.com/oTpl8LZ.jpg',
-    full_name: 'Family'
+    url: 'https://i.imgur.com/WKWiwiq.png',
+    full_name: 'Family',
+    hex: '75CCC2'
   },
   {
     category: 'FN',
-    url: 'https://i.imgur.com/0jAbxU3.jpg',
-    full_name: 'Funeral & Memorial'
+    url: 'https://i.imgur.com/5nYqiBw.png',
+    full_name: 'Funeral & Memorial',
+    hex: '84C2D1'
   },
   {
     category: 'MD',
-    url: 'https://i.imgur.com/XQt4TXP.jpg',
-    full_name: 'Medical'
+    url: 'https://i.imgur.com/tCThhXi.png',
+    full_name: 'Medical',
+    hex: 'CC5874'
+
   },
   {
     category: 'MB',
-    url: 'https://i.imgur.com/6PbVtji.jpg',
-    full_name: 'Monthly Bills'
+    url: 'https://i.imgur.com/zxEU0v6.png',
+    full_name: 'Monthly Bills',
+    hex: '6FC692'
   },
   {
     category: 'NW',
-    url: 'https://i.imgur.com/FnqbWmO.jpg',
-    full_name: 'Newlyweds'
+    url: 'https://i.imgur.com/AEQFS76.png',
+    full_name: 'Newlyweds',
+    hex: '61BCAF'
   },
   {
     category: 'OT',
-    url: 'https://i.imgur.com/MJiMQul.jpg',
+    url: 'https://i.imgur.com/gGqec9y.png',
     full_name: 'Other'
   },
   {
     category: 'SP',
-    url: 'https://i.imgur.com/FFokxuU.jpg',
-    full_name: 'Sports'
+    url: 'https://i.imgur.com/roVg7z2.png',
+    full_name: 'Sports',
+    hex: '5BBECE'
   },
   {
     category: 'TR',
     url: 'https://i.imgur.com/IyEgNHX.jpg',
-    full_name: 'Travel'
+    full_name: 'Travel',
+    hex: '78A5D1'
   },
   {
     category: 'UR',
-    url: 'https://i.imgur.com/81XGwCO.jpg',
-    full_name: 'Ukraine Relief'
+    url: 'https://i.imgur.com/5xpc6e8.png',
+    full_name: 'Ukraine Relief',
+    hex: '679BC6'
   },
   {
     category: 'VO',
-    url: 'https://i.imgur.com/IsoYc1i.jpg',
-    full_name: 'Volunteer'
+    url: 'https://i.imgur.com/XWuZWp2.png',
+    full_name: 'Volunteer',
+    hex: '63ABC1'
   },
   {
     category: 'WI',
-    url: 'https://i.imgur.com/z4ZC6VV.jpg',
-    full_name: 'Wishes'
+    url: 'https://i.imgur.com/QXXDFN2.png',
+    full_name: 'Wishes',
+    hex: 'BFE079'
   }
 ]
 

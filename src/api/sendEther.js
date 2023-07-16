@@ -1,5 +1,6 @@
+import BN from 'bn.js';
 import { utils } from 'web3';
-import erc20ABI from '../contracts/ABIs/erc20ABI'; // adjust the path to point to your erc20ABI.js file
+import erc20ABI from '../contracts/ABIs/erc20ABI';
 
 export const sendToken = async (web3, accounts, amount, recipient) => {
     if (!web3 || accounts.length === 0) {
@@ -11,7 +12,9 @@ export const sendToken = async (web3, accounts, amount, recipient) => {
 
     // Convert the amount to the smallest unit of the token (often called "wei")
     const amountInWei = utils.toWei(amount, 'ether');
-    const amountInDono = amountInWei / 1000000000000000000;
+
+    // Use bn.js for big number operations
+    const amountInDono = new BN(amountInWei).div(new BN('1000000000000000000')).toString();
 
     // Create a contract instance
     const contract = new web3.eth.Contract(erc20ABI, tokenContractAddress);
@@ -40,5 +43,4 @@ export const sendToken = async (web3, accounts, amount, recipient) => {
             // Don't re-throw the error
         }
     }
-    
 };

@@ -1,5 +1,4 @@
 import BN from 'bn.js';
-import { utils } from 'web3';
 import erc20ABI from '../contracts/ABIs/erc20ABI';
 
 export const sendToken = async (web3, accounts, amount, recipient) => {
@@ -11,10 +10,11 @@ export const sendToken = async (web3, accounts, amount, recipient) => {
     const tokenContractAddress = process.env.REACT_APP_ERC20_CONTRACT_ADDRESS;
 
     // Convert the amount to the smallest unit of the token (often called "wei")
-    const amountInWei = utils.toWei(amount, 'ether');
-
-    // Use bn.js for big number operations
-    const amountInDono = new BN(amountInWei).div(new BN('1000000000000000000')).toString();
+    // We use BN for the conversion
+    const base = new BN(1);
+    const exponent = new BN(1); // This is the usual number of decimal places in Ethereum
+    const weiMultiplier = base.pow(exponent);
+    const amountInWei = new BN(amount).mul(weiMultiplier);
 
     // Create a contract instance
     const contract = new web3.eth.Contract(erc20ABI, tokenContractAddress);
@@ -30,7 +30,7 @@ export const sendToken = async (web3, accounts, amount, recipient) => {
 
     try {
         // Call the contract's transfer function
-        const receipt = await contract.methods.transfer(recipient, amountInDono).send(transaction);
+        const receipt = await contract.methods.transfer(recipient, amountInWei.toString()).send(transaction);
         console.log('Transaction receipt:', receipt);
         return receipt;
     } catch (error) {

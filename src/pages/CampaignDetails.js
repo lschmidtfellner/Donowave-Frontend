@@ -1,26 +1,21 @@
-
 import React, { useContext, useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
-import {
-  campaignContextComponent,
-  CampaignContext
-} from '../context/campaignContextComponent';
+import { CampaignContext } from '../context/campaignContextComponent';
 import Swal from 'sweetalert2';
 import categoryURLs from '../data/categoryURLs';
 import { getCampaign } from '../api/campaignService';
-import DonationForm from '../components/DonationForm'; // import the DonationForm component
-import { Web3Context } from '../context/web3Context'; // import the Web3Context
-import dateInterpreter from '../data/dateInterpreter'
-
+import DonationForm from '../components/DonationForm';
+import { Web3Context } from '../context/web3Context';
+import dateInterpreter from '../data/dateInterpreter';
 
 const CampaignDetails = () => {
   const { campaigns } = useContext(CampaignContext);
-  const { web3, accounts } = useContext(Web3Context); // get web3 and accounts from context
+  const { web3, accounts } = useContext(Web3Context);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const selectedCampaignId = queryParams.get('id');
   const [selectedCampaign, setSelectedCampaign] = useState({});
-  const [openDonate, setOpenDonate] = useState(false); // Add this line
+  const [openDonate, setOpenDonate] = useState(false);
 
   useEffect(() => {
     console.log('Running useEffect', { campaigns, selectedCampaignId });
@@ -33,7 +28,6 @@ const CampaignDetails = () => {
     }
   }, [selectedCampaignId]);
 
-  // Check if the selectedCampaign object is empty
   if (Object.keys(selectedCampaign).length === 0) {
     return <p>Loading...</p>;
   }
@@ -53,11 +47,10 @@ const CampaignDetails = () => {
         <div className="flex flex-col p-4">
           <div className="flex justify-center items-center">
             <img
-              src={
-                categoryURLs.find((catObj) => catObj.category === selectedCampaign.category)
-                  .url
-              } className="w-1/4"
-            ></img>
+              src={categoryURLs.find((catObj) => catObj.category === selectedCampaign.category).url}
+              className="w-1/4"
+              alt="Campaign Category"
+            />
             <h2 className="font-bold text-black ml-4">{selectedCampaign.title}</h2>
           </div>
           <div className="text-left mt-4 text-base">
@@ -66,14 +59,14 @@ const CampaignDetails = () => {
           <div className="text-left mt-4">
             <label className="font-bold text-xs">RAISED AMOUNT:</label>
             <p>
-              {Number(selectedCampaign.raised_amount).toLocaleString()}DC of {Number(selectedCampaign.goal_amount).toLocaleString()}DC
+              {Number(selectedCampaign.raised_amount).toLocaleString()}DC of{' '}
+              {Number(selectedCampaign.goal_amount).toLocaleString()}DC
             </p>
           </div>
           <div className="text-left mt-4">
             <label className="font-bold text-xs">DEADLINE:</label>
             <p>{dateInterpreter(selectedCampaign.deadline)}</p>
           </div>
-
           <button onClick={handleDonateClick} className="lavender rounded-full lg:w-1/6 md:w-1/6 py-2 w-1/3 text-white font-bold  hover:text-black mt-4 text-xs">Donate Now</button>
       {openDonate && <DonationForm setOpen={setOpenDonate} />}
 

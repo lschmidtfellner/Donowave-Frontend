@@ -39,7 +39,7 @@ const CampaignDetails = () => {
       }
     }
     setOpenDonate(true);
-  };
+};
 
   return (
     <div className="campaignFeed w-10/12 mt-8 mx-auto">
@@ -67,18 +67,11 @@ const CampaignDetails = () => {
             <label className="font-bold text-xs">DEADLINE:</label>
             <p>{dateInterpreter(selectedCampaign.deadline)}</p>
           </div>
+          <button onClick={handleDonateClick} className="lavender rounded-full lg:w-1/6 md:w-1/6 py-2 w-1/3 text-white font-bold  hover:text-black mt-4 text-xs">Donate Now</button>
+      {openDonate && <DonationForm setOpen={setOpenDonate} />}
 
-          <div className="text-center mt-4">
-            <button
-              className="lavender rounded-full lg:w-1/6 md:w-1/6 py-2 w-1/2 text-white font-bold hover:text-black mt-4 text-xs"
-              onClick={handleDonateClick}
-            >
-              Donate Now
-            </button>
-          </div>
         </div>
       </div>
-      {openDonate && <DonationForm setOpen={setOpenDonate} />}
     </div>
   );
 };

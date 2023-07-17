@@ -27,8 +27,13 @@
   background-color: var(--lavender);
 }
 
+.text-lavender {
+  color: var(--lavender);
+}
+
 #root {
   background-color: rgba(186, 143, 255, 0.18);
+  min-height: 100vh;
 }
 
 body {

@@ -30,10 +30,10 @@ export default function Signin() {
   }
 
   return (
-    <div className="flex flex-1 flex-col justify-center px-6 lg:px-8 h-max bg-white">
+    <div className="flex flex-1 flex-col justify-center px-6 lg:px-8 h-max bg-white min-h-screen">
       {/* Render the LottieAnimation component */}
       <form onSubmit={handleSubmit} className="placeholder:">
-        <h2 className="text-left text-3xl font-bold leading-9 tracking-tight text-black mt-16 mb-10 ml-8">
+        <h2 className="text-left text-3xl font-bold leading-9 tracking-tight text-black mb-10 ml-8">
           Sign in
         </h2>
         <div className="lg:w-2/5 md:w-2/5 w-11/12 ml-4">

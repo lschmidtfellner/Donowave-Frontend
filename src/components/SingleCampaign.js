@@ -8,7 +8,7 @@ const SingleCampaign = ({ campaign }) => (
     <div className="flex flex-col p-4 mb-8">
       <div className="flex justify-start items-center">
         <img
-          className="w-16 h-16 object-cover rounded-full mr-4"
+          className="w-16 h-16 mr-4"
           src={
             categoryURLs.find((catObj) => catObj.category === campaign.category)
               .url

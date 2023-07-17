@@ -88,7 +88,7 @@ function Nav() {
           </div>
         </div>
       )}
-      <nav ref={menuRef} className="navbar fixed w-full h-full bg-white text-black">
+      <nav ref={menuRef} className="navbar fixed w-full h-screen bg-white text-black top-0">
         <ul className="hamburger font-bold text-2xl flex flex-col mx-16 pt-32">
         <li onClick={closeMenu}>
             <Link to="/about">About</Link>

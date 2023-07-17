@@ -38,9 +38,9 @@ export default function Signup() {
   }
 
   return (
-    <div className="flex flex-1 flex-col justify-center px-6 lg:px-8 h-max bg-white">
+    <div className="flex flex-1 flex-col justify-center px-6 lg:px-8 h-max bg-white min-h-screen">
       <form onSubmit={handleSubmit} className="placeholder:">
-        <h2 className="text-left text-3xl font-bold leading-9 tracking-tight text-black mt-16 mb-10 ml-8">
+        <h2 className="text-left text-3xl font-bold leading-9 tracking-tight text-black mb-10 ml-8">
           Sign up
         </h2>
         {signupSuccess && (

@@ -97,7 +97,7 @@ const categoryURLs = [
   },
   {
     category: 'TR',
-    url: 'https://i.imgur.com/IyEgNHX.jpg',
+    url: 'https://i.imgur.com/6Y83yTk.png',
     full_name: 'Travel',
     hex: '78A5D1'
   },

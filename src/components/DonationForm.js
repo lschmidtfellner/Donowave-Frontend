@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 
 import { sendToken } from '../api/sendEther';
 import { createDonation } from '../api/donationService';
+import { CampaignContext } from '../context/campaignContextComponent';
 import { AuthContext } from '../context/authContextComponent';
 
 export default function DonationForm({ setOpen }) {
@@ -20,9 +21,7 @@ export default function DonationForm({ setOpen }) {
 
   const handleSubmit = async () => {
     console.log('User:', user.user_id);
-
     console.log('CampaignContext:', CampaignContext);
-
     const numericAmount = Number(amount);
     if (!Number.isInteger(numericAmount) || numericAmount <= 0) {
       alert('Please enter a positive whole number.');
@@ -41,7 +40,6 @@ export default function DonationForm({ setOpen }) {
       const userId = user.user_id;
 
       // Log the values here
-
       console.log('selectedCampaignId:', selectedCampaignId);
       console.log('userId:', userId);
       console.log('numericAmount:', numericAmount);
@@ -51,13 +49,16 @@ export default function DonationForm({ setOpen }) {
         campaign: selectedCampaignId,
         user: userId.toString(),
         amount: numericAmount.toString(),
-        transaction_hash: receipt.transactionHash.toString(),
+        transaction_hash: receipt.transactionHash.toString()
       });
     } else {
       console.error('Transaction failed:', receipt);
     }
     setOpen(false);
   };
+
+
+
 
   return (
     <Transition.Root show={true} as={Fragment}>
@@ -132,4 +133,3 @@ export default function DonationForm({ setOpen }) {
     </Transition.Root>
   );
 }
-

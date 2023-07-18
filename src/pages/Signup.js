@@ -73,15 +73,6 @@ export default function Signup() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <label className="font-bold text-xs ml-4">METAMASK WALLET</label>
-          <input
-            className="block w-full rounded-full border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 mt-1 mb-8"
-            type="text"
-            name="walletAddress"
-            value={walletAddress}
-            onChange={(e) => setWalletAddress(e.target.value)}
-          />
-         
           <div className="mb-8 flex flex-col items-center justify-center">
             <button 
 

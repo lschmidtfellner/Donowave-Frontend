@@ -3,12 +3,16 @@ import { AuthContext } from "../context/authContextComponent";
 import { getUserCampaigns, getUserDonations } from "../api/userService";
 import SingleCampaign from "../components/SingleCampaign";
 import { Link } from "react-router-dom";
+import { getCampaign } from "../api/campaignService";
+import  dateInterpreter  from '../data/dateInterpreter'
+import {CampaignContext} from '../context/campaignContextComponent'
 
 function MyAccount() {
   const { user } = useContext(AuthContext);
   const [userCampaigns, setUserCampaigns] = useState([]);
   const [userDonations, setUserDonations] = useState([]);
   const [password, setPassword] = useState('');
+  const{ campaigns }= useContext(CampaignContext)
 
   useEffect(() => {
     const fetchUserCampaignsAndDonations = async () => {
@@ -66,11 +70,13 @@ function MyAccount() {
           ) : (
             userDonations.map((donation) => (
               <Link
-                to={`/campaigns/details?id=${donation.campaign.id}`}
+                to={`/campaigns/details?id=${donation.campaign}`}
                 key={donation.id}
               >
                 <div>
+                  <h2>{campaigns.find(campaign => campaign.id === donation.campaign).title}</h2>
                   <h3>{donation.amount}</h3>
+                  <h3>{dateInterpreter(donation.created_at)}</h3>
                 </div>
               </Link>
             ))

@@ -20,6 +20,11 @@ const CampaignDetails = () => {
   const selectedCampaignId = queryParams.get('id');
   const [selectedCampaign, setSelectedCampaign] = useState({});
   const [openDonate, setOpenDonate] = useState(false); // Add this line
+  const progress = Math.min(
+    (parseInt(selectedCampaign.raised_amount) / parseInt(selectedCampaign.goal_amount)) * 100,
+    100
+  )
+
 
   useEffect(() => {
     console.log('Running useEffect', { campaigns, selectedCampaignId });
@@ -72,6 +77,26 @@ const CampaignDetails = () => {
             <label className="font-bold text-xs">DEADLINE:</label>
             <p>{dateInterpreter(selectedCampaign.deadline)}</p>
           </div>
+          <div
+          className="prog-bar-container"
+          style={{
+            height: '10px',
+            width: '100%',
+            backgroundColor: '#EBE8F7',
+            borderRadius: '5px'
+          }}
+        >
+          <div
+            className="prog-bar-completion"
+            style={{
+              width: `${progress}%`,
+              height: '10px',
+              backgroundColor: '#8FEFB6',
+              alignItems: 'left',
+              borderRadius: '5px'
+            }}
+          ></div>
+        </div>
 
           <button onClick={handleDonateClick} className="lavender rounded-full lg:w-1/6 md:w-1/6 py-2 w-1/3 text-white font-bold  hover:text-black mt-4 text-xs">Donate Now</button>
       {openDonate && <DonationForm setOpen={setOpenDonate} />}

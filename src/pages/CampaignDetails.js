@@ -83,7 +83,8 @@ const CampaignDetails = () => {
             height: '10px',
             width: '100%',
             backgroundColor: '#EBE8F7',
-            borderRadius: '5px'
+            borderRadius: '5px',
+            margin: '20px 0 20px 0'
           }}
         >
           <div

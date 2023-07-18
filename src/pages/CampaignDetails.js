@@ -7,32 +7,31 @@ import {
 import Swal from 'sweetalert2';
 import categoryURLs from '../data/categoryURLs';
 import { getCampaign } from '../api/campaignService';
-import DonationForm from '../components/DonationForm'; // import the DonationForm component
-import { Web3Context } from '../context/web3Context'; // import the Web3Context
-import dateInterpreter from '../data/dateInterpreter'
-
+import DonationForm from '../components/DonationForm';
+import { Web3Context } from '../context/web3Context';
+import dateInterpreter from '../data/dateInterpreter';
 
 const CampaignDetails = () => {
   const { campaigns } = useContext(CampaignContext);
-  const { web3, accounts } = useContext(Web3Context); // get web3 and accounts from context
+  const { web3, accounts } = useContext(Web3Context);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const selectedCampaignId = queryParams.get('id');
   const [selectedCampaign, setSelectedCampaign] = useState({});
-  const [openDonate, setOpenDonate] = useState(false); // Add this line
+  const [openDonate, setOpenDonate] = useState(false);
+
+  const fetchCampaign = async () => {
+    const campaign = await getCampaign(selectedCampaignId);
+    setSelectedCampaign(campaign);
+  };
 
   useEffect(() => {
     console.log('Running useEffect', { campaigns, selectedCampaignId });
     if (selectedCampaignId) {
-      const fetchCampaign = async () => {
-        const campaign = await getCampaign(selectedCampaignId);
-        setSelectedCampaign(campaign);
-      };
       fetchCampaign();
     }
   }, [selectedCampaignId]);
 
-  // Check if the selectedCampaign object is empty
   if (Object.keys(selectedCampaign).length === 0) {
     return <p>Loading...</p>;
   }
@@ -44,7 +43,7 @@ const CampaignDetails = () => {
       }
     }
     setOpenDonate(true);
-};
+  };
 
   return (
     <div className="campaignFeed w-10/12 mt-8 mx-auto">
@@ -55,7 +54,8 @@ const CampaignDetails = () => {
               src={
                 categoryURLs.find((catObj) => catObj.category === selectedCampaign.category)
                   .url
-              } className="w-1/4"
+              }
+              className="w-1/4"
             ></img>
             <h2 className="font-bold text-black ml-4">{selectedCampaign.title}</h2>
           </div>
@@ -73,9 +73,8 @@ const CampaignDetails = () => {
             <p>{dateInterpreter(selectedCampaign.deadline)}</p>
           </div>
 
-          <button onClick={handleDonateClick} className="lavender rounded-full lg:w-1/6 md:w-1/6 py-2 w-1/3 text-white font-bold  hover:text-black mt-4 text-xs">Donate Now</button>
-      {openDonate && <DonationForm setOpen={setOpenDonate} />}
-
+          <button onClick={handleDonateClick} className="lavender rounded-full lg:w-1/6 md:w-1/6 py-2 w-1/3 text-white font-bold hover:text-black mt-4 text-xs">Donate Now</button>
+          {openDonate && <DonationForm setOpen={setOpenDonate} refreshCampaign={fetchCampaign} />}
         </div>
       </div>
     </div>

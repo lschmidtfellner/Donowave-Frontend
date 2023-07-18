@@ -39,6 +39,7 @@ export default function DonationForm({ setOpen, refreshCampaign }) {
     Swal.fire({
       title: 'Processing transaction...',
       allowOutsideClick: false,
+      showConfirmButton: false,
       onBeforeOpen: () => {
         Swal.showLoading()
       },

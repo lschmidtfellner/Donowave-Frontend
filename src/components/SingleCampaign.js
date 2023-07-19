@@ -15,7 +15,7 @@ const SingleCampaign = ({ campaign }) => {
       <div className="flex flex-col p-4 mb-8">
         <div className="flex justify-start items-center">
           <img
-            className="w-16 h-16 mr-4"
+            className="object-contain w-full h-full max-w-10 max-h-10 mr-2"
             src={
               categoryURLs.find(
                 (catObj) => catObj.category === campaign.category

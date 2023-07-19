@@ -7,6 +7,7 @@ import { createDonation } from '../api/donationService';
 import { CampaignContext } from '../context/campaignContextComponent';
 import { AuthContext } from '../context/authContextComponent';
 import Swal from 'sweetalert2';
+import './DonationForm.css'
 
 
 export default function DonationForm({ setOpen, refreshCampaign }) {
@@ -40,8 +41,10 @@ export default function DonationForm({ setOpen, refreshCampaign }) {
 
     Swal.fire({
       title: 'Processing transaction...',
-      timerProgressBar: true,
+//       timerProgressBar: true,
+      html: '<div class="load"></div>',
       allowOutsideClick: false,
+      showConfirmButton: false,
       onBeforeOpen: () => {
         Swal.showLoading()
       },

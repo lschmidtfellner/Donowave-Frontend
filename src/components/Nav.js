@@ -63,15 +63,15 @@ function Nav() {
     // gsap.set(navbarRef.current, { opacity: 0.8 });
   }, []);
 
-  useEffect(() => {
-    if (isStickyNavHidden) {
-      gsap.fromTo(
-        '#sticky-nav',
-        { opacity: 0 },
-        { opacity: 0.8, duration: 1, ease: 'power2.out' }
-      );
-    }
-  }, [isStickyNavHidden]);
+  // useEffect(() => {
+  //   if (isStickyNavHidden) {
+  //     gsap.fromTo(
+  //       '#sticky-nav',
+  //       { opacity: 0 },
+  //       { opacity: 0.8, duration: 1, ease: 'power2.out' }
+  //     );
+  //   }
+  // }, [isStickyNavHidden]);
 
 
 

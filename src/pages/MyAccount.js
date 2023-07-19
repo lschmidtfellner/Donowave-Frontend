@@ -64,7 +64,7 @@ function MyAccount() {
           </div>
           <div className="border-t-2 border-gray-400 my-10 w-1/2"></div>
           <h2 className="text-left text-3xl font-bold leading-9 tracking-tight text-black mt-10 mb-10">MY DONATIONS</h2>
-          <div className="bg-white rounded-md mb-8 p-4 shadow">
+          <div className="rounded-md mb-8  w-full">
             {userDonations.length === 0 ? (
               <p className="text-base text-left ml-8">No donations found.</p>
             ) : (
@@ -73,7 +73,7 @@ function MyAccount() {
                   to={`/campaigns/details?id=${donation.campaign}`}
                   key={donation.id}
                 >
-                  <div className="text-left mb-8">
+                  <div className="text-left mb-8 bg-white p-8 rounded-md shadow w-full">
                     <label className="font-bold text-xs">CAMPAIGN:</label>
                     <p className="text-aqua font-bold text-base mb-2">{campaigns.find(campaign => campaign.id === donation.campaign).title}</p>
                     <label className="font-bold text-xs">AMOUNT:</label>

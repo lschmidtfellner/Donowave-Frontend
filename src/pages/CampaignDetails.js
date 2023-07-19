@@ -59,7 +59,7 @@ const CampaignDetails = () => {
                 categoryURLs.find((catObj) => catObj.category === selectedCampaign.category)
                   .url
               }
-              className="w-1/4"
+              className="object-contain w-full h-full max-w-20 max-h-20 mr-2"
             ></img>
             <h2 className="font-bold text-black ml-4">{selectedCampaign.title}</h2>
           </div>

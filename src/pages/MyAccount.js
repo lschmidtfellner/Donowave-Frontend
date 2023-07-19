@@ -104,7 +104,7 @@ function MyAccount() {
           <h2 className="text-left text-3xl font-bold leading-9 tracking-tight text-black mb-10">
             MY CAMPAIGNS
           </h2>
-          <div className="bg-white rounded-md mb-8 p-4 shadow">
+          <div className="bg-white rounded-md mb-8 p-4 shadow justify-start">
             {userCampaigns.length === 0 ? (
               <p className="text-base text-left ml-8">No campaigns found.</p>
             ) : (

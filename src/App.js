@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { CampaignContextProvider } from "./context/campaignContextComponent";
 import AuthContextComponent, {
   AuthContext,
@@ -17,9 +17,10 @@ import About from "./pages/About";
 
 function App() {
   const { isLoggedIn } = useContext(AuthContext);
+  // const [isStickyNavHidden, setIsStickyNavHidden] = useState(false);
 
   return (
-    <CampaignContextProvider value={{ isLoggedIn: false, setIsLoggedIn: () => {}, user: {}, setUser: () => {} }}>
+    <CampaignContextProvider value={{ isLoggedIn: false, setIsLoggedIn: () => { }, user: {}, setUser: () => { } }}>
       {/* <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> */}
       <Nav />
       <Routes>
@@ -46,7 +47,7 @@ function App() {
         />
       </Routes>
     </CampaignContextProvider>
-   
+
   );
 }
 

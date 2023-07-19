@@ -63,15 +63,15 @@ function Nav() {
     // gsap.set(navbarRef.current, { opacity: 0.8 });
   }, []);
 
-  useEffect(() => {
-    if (isStickyNavHidden) {
-      gsap.fromTo(
-        '#sticky-nav',
-        { opacity: 0 },
-        { opacity: 0.8, duration: 1, ease: 'power2.out' }
-      );
-    }
-  }, [isStickyNavHidden]);
+  // useEffect(() => {
+  //   if (isStickyNavHidden) {
+  //     gsap.fromTo(
+  //       '#sticky-nav',
+  //       { opacity: 0 },
+  //       { opacity: 0.8, duration: 1, ease: 'power2.out' }
+  //     );
+  //   }
+  // }, [isStickyNavHidden]);
 
 
 
@@ -88,7 +88,7 @@ function Nav() {
           </div>
         </div>
       )}
-      <nav ref={menuRef} className="navbar fixed w-full h-full bg-white text-black">
+      <nav ref={menuRef} className="navbar fixed w-full h-screen bg-white text-black top-0">
         <ul className="hamburger font-bold text-2xl flex flex-col mx-16 pt-32">
         <li onClick={closeMenu}>
             <Link to="/about">About</Link>

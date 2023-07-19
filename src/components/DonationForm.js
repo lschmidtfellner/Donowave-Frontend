@@ -1,6 +1,5 @@
-import { Fragment, useRef, useState, useContext } from 'react';
+import React, { Fragment, useRef, useState, useContext } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { HeartIcon } from '@heroicons/react/outline';
 import { Web3Context } from '../context/web3Context';
 import { useLocation } from 'react-router-dom';
 import { sendToken } from '../api/sendEther';
@@ -10,13 +9,15 @@ import { AuthContext } from '../context/authContextComponent';
 import Swal from 'sweetalert2';
 import './DonationForm.css'
 
+
 export default function DonationForm({ setOpen, refreshCampaign }) {
   const { web3, accounts } = useContext(Web3Context);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const selectedCampaignId = queryParams.get('id');
-  const { user } = useContext(AuthContext); 
+  const { user } = useContext(AuthContext);
   const [amount, setAmount] = useState('');
+  // const [open, setOpen] = useState(true);
   const cancelButtonRef = useRef(null);
 
   const handleSubmit = async () => {
@@ -25,20 +26,22 @@ export default function DonationForm({ setOpen, refreshCampaign }) {
       alert('Please enter a positive whole number.');
       return;
     }
-  
+
     if (!web3 || accounts.length === 0) {
       alert('Please connect to MetaMask.');
       return;
     }
-  
+
     const recipient = process.env.REACT_APP_METAMASK_ADDRESS;
-  
+
     // Close the donation modal
     setOpen(false);
-  
+
     // Show a loading alert
+
     Swal.fire({
       title: 'Processing transaction...',
+//       timerProgressBar: true,
       html: '<div class="load"></div>',
       allowOutsideClick: false,
       showConfirmButton: false,
@@ -46,30 +49,33 @@ export default function DonationForm({ setOpen, refreshCampaign }) {
         Swal.showLoading()
       },
     });
-  
+
     const receipt = await sendToken(web3, accounts, amount, recipient);
     if (receipt && receipt.status) {
       const userId = user.user_id;
-  
+
       await createDonation({
         campaign: selectedCampaignId,
         user: userId.toString(),
         amount: numericAmount.toString(),
         transaction_hash: receipt.transactionHash.toString()
       });
-  
+
       // Close the loading alert
       Swal.close();
-  
+
       // Show success alert
       Swal.fire({
         icon: 'success',
         title: "You have successfully made a donation!"
       });
-  
+
       // Refresh campaign data
       refreshCampaign();
-  
+
+     
+
+
     } else {
       console.error('Transaction failed:', receipt);
       // Close the loading alert and show error message
@@ -79,8 +85,10 @@ export default function DonationForm({ setOpen, refreshCampaign }) {
         title: 'Transaction failed'
       });
     }
-  }; 
-  
+    //  // Call the setIsStickyNavHidden callback
+    //  setIsStickyNavHidden(false);
+  };
+
   return (
     <Transition.Root show={true} as={Fragment}>
       <Dialog as="div" static className="fixed inset-0 overflow-y-auto" initialFocus={cancelButtonRef} onClose={() => setOpen(false)}>

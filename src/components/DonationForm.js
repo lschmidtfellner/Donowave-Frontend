@@ -2,7 +2,7 @@ import React, { Fragment, useRef, useState, useContext } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Web3Context } from '../context/web3Context';
 import { useLocation } from 'react-router-dom';
-import { sendToken } from '../api/sendEther';
+import { sendToken, getTokenBalance } from '../api/sendEther'; // import getTokenBalance
 import { createDonation } from '../api/donationService';
 import { CampaignContext } from '../context/campaignContextComponent';
 import { AuthContext } from '../context/authContextComponent';
@@ -17,7 +17,6 @@ export default function DonationForm({ setOpen, refreshCampaign }) {
   const selectedCampaignId = queryParams.get('id');
   const { user } = useContext(AuthContext);
   const [amount, setAmount] = useState('');
-  // const [open, setOpen] = useState(true);
   const cancelButtonRef = useRef(null);
 
   const handleSubmit = async () => {
@@ -32,17 +31,13 @@ export default function DonationForm({ setOpen, refreshCampaign }) {
       return;
     }
 
-    const recipient = process.env.REACT_APP_METAMASK_ADDRESS;
+  const recipient = process.env.REACT_APP_METAMASK_ADDRESS;
 
     // Query the balance of the account
-    const balance = await web3.eth.getBalance(accounts[0]);
-
-    // Convert the balance to Ether, 
-    // since `getBalance` returns the balance in Wei
-    const balanceInEther = web3.utils.fromWei(balance, 'ether');
+    const balance = await getTokenBalance(web3, accounts[0]);
 
     // Check if the balance is less than the amount the user wishes to donate
-    if (numericAmount > balanceInEther) {
+    if (numericAmount > balance) {
       alert('Insufficient balance. Please enter an amount less than or equal to your current balance.');
       return;
     }
@@ -83,10 +78,7 @@ export default function DonationForm({ setOpen, refreshCampaign }) {
 
       // Refresh campaign data
       refreshCampaign();
-
-     
-
-
+      
     } else {
       console.error('Transaction failed:', receipt);
       // Close the loading alert and show error message

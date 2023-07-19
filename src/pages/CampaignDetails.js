@@ -1,12 +1,13 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { useLocation, Link } from 'react-router-dom';
-import { CampaignContext } from '../context/campaignContextComponent';
-import Swal from 'sweetalert2';
-import categoryURLs from '../data/categoryURLs';
-import { getCampaign, getCampaignDonations } from '../api/campaignService';
-import DonationForm from '../components/DonationForm';
-import { Web3Context } from '../context/web3Context';
-import dateInterpreter from '../data/dateInterpreter';
+import React, { useContext, useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
+import {
+  CampaignContext
+} from '../context/campaignContextComponent'
+import categoryURLs from '../data/categoryURLs'
+import { getCampaign } from '../api/campaignService'
+import DonationForm from '../components/DonationForm'
+import { Web3Context } from '../context/web3Context'
+import dateInterpreter from '../data/dateInterpreter'
 
 const CampaignDetails = () => {
   const { campaigns } = useContext(CampaignContext);
@@ -29,7 +30,9 @@ const CampaignDetails = () => {
   }
 
   const progress = Math.min(
-    (parseInt(selectedCampaign.raised_amount) / parseInt(selectedCampaign.goal_amount)) * 100,
+    (parseInt(selectedCampaign.raised_amount) /
+      parseInt(selectedCampaign.goal_amount)) *
+    100,
     100
   );
 
@@ -105,7 +108,8 @@ const CampaignDetails = () => {
                 height: '10px',
                 backgroundColor: '#8FEFB6',
                 alignItems: 'left',
-                borderRadius: '5px'
+                borderRadius: '5px',
+                boxShadow: progress === 100 ? '0px 0px 10px 5px #C2F9C6' : ''
               }}
             ></div>
           </div>

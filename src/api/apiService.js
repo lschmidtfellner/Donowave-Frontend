@@ -1,15 +1,12 @@
 import api from "./apiConfig";
 
 export const registerUser = async (registerData) => {
-  console.log("Register Data:", registerData); // Log the registerData object
-
   try {
     const resp = await api.post("/api/register/", registerData);
-    console.log("Registration Response:", resp.data); // Log the registration response data
     return resp;
   } catch (error) {
-    console.error("Registration Failed:", error); // Log the registration error
-    throw error; // Rethrow the error to handle it in the component
+    console.error("Registration Failed:", error);
+    throw error;
   }
 };
 

@@ -4,7 +4,7 @@ import {
   CampaignContext
 } from '../context/campaignContextComponent'
 import categoryURLs from '../data/categoryURLs'
-import { getCampaign } from '../api/campaignService'
+import { getCampaign, getCampaignDonations } from '../api/campaignService'
 import DonationForm from '../components/DonationForm'
 import { Web3Context } from '../context/web3Context'
 import dateInterpreter from '../data/dateInterpreter'
@@ -77,7 +77,7 @@ const CampaignDetails = () => {
               {selectedCampaign.title}
             </h2>
           </div>
-          <div className="text-left mt-4 text-base">
+          <div className="text-left mt-4 text-sm">
             <p>{selectedCampaign.description}</p>
           </div>
           <div className="text-left mt-4">
@@ -114,11 +114,11 @@ const CampaignDetails = () => {
             ></div>
           </div>
           <div>
-          <h3>Latest Donations</h3>
+          <label className="font-bold text-xs text-left">LATEST DONATIONS:</label>
           {donations.slice(-3).reverse().map((donation, index) => (
-            <div key={index}>
-              <p>Amount: {donation.amount}</p>
-              <p>On: {dateInterpreter(donation.created_at)}</p>
+            <div className="mb-6" key={index}>
+              <p className="text-sm">Amount: {donation.amount}</p>
+              <p className="text-sm">On: {dateInterpreter(donation.created_at)}</p>
             </div>
           ))}
         </div>

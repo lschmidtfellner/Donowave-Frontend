@@ -3,11 +3,10 @@
 @import 'tailwindcss/utilities';
 
 
-
-
 :root {
   --aqua: #00D1F2;
   --lavender: #BA8FFF;
+
   
 }
 
@@ -30,6 +29,8 @@
 .text-lavender {
   color: var(--lavender);
 }
+
+
 
 #root {
   background-color: rgba(186, 143, 255, 0.18);

@@ -104,7 +104,7 @@ function MyAccount() {
           <h2 className="text-left text-3xl font-bold leading-9 tracking-tight text-black mb-10">
             MY CAMPAIGNS
           </h2>
-          <div className="bg-white rounded-md mb-8 p-4 shadow">
+          <div className="bg-white rounded-md mb-10 p-4 shadow">
             {userCampaigns.length === 0 ? (
               <p className="text-base text-left ml-8">No campaigns found.</p>
             ) : (
@@ -112,12 +112,13 @@ function MyAccount() {
                 <Link to={`/campaigns/details?id=${campaign.id}`} key={campaign.id}>
                   <SingleCampaign campaign={campaign} />
                 </Link>
+
               ))
             )}
           </div>
           <div className="border-t-2 border-gray-400 my-10 w-1/2"></div>
           <h2 className="text-left text-3xl font-bold leading-9 tracking-tight text-black mt-10 mb-10">MY DONATIONS</h2>
-          <div className="rounded-md mb-8  w-full">
+          <div className="bg-white rounded-md mb-10 p-4 shadow">
             {userDonations.length === 0 ? (
               <p className="text-base text-left ml-8">No donations found.</p>
             ) : (

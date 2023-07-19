@@ -49,7 +49,9 @@ export const getTokenBalance = async (web3, account) => {
     try {
         // Call the contract's balanceOf function
         const balance = await contract.methods.balanceOf(account).call();
+        console.log('Balance:', balance);
         return balance;
+        
     } catch (error) {
         console.error('Error getting token balance', error);
     }

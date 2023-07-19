@@ -1,6 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
-import axios from 'axios'
-import api from '../api/apiConfig'
+import React, { useState, useEffect } from 'react'
 import { getCampaigns } from '../api/campaignService'
 
 export const CampaignContext = React.createContext()

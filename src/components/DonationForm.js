@@ -34,14 +34,25 @@ export default function DonationForm({ setOpen, refreshCampaign }) {
 
     const recipient = process.env.REACT_APP_METAMASK_ADDRESS;
 
+    // Query the balance of the account
+    const balance = await web3.eth.getBalance(accounts[0]);
+
+    // Convert the balance to Ether, 
+    // since `getBalance` returns the balance in Wei
+    const balanceInEther = web3.utils.fromWei(balance, 'ether');
+
+    // Check if the balance is less than the amount the user wishes to donate
+    if (numericAmount > balanceInEther) {
+      alert('Insufficient balance. Please enter an amount less than or equal to your current balance.');
+      return;
+    }
+
     // Close the donation modal
     setOpen(false);
 
     // Show a loading alert
-
     Swal.fire({
       title: 'Processing transaction...',
-//       timerProgressBar: true,
       html: '<div class="load"></div>',
       allowOutsideClick: false,
       showConfirmButton: false,

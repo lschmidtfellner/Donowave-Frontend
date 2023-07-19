@@ -22,29 +22,38 @@ export default function DonationForm({ setOpen, refreshCampaign }) {
   const handleSubmit = async () => {
     const numericAmount = Number(amount);
     if (!Number.isInteger(numericAmount) || numericAmount <= 0) {
-      alert('Please enter a positive whole number.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Please enter a positive whole number.',
+      });
       return;
     }
-
+  
     if (!web3 || accounts.length === 0) {
-      alert('Please connect to MetaMask.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Please connect to MetaMask.',
+      });
       return;
     }
-
-  const recipient = process.env.REACT_APP_METAMASK_ADDRESS;
-
+  
+    const recipient = process.env.REACT_APP_METAMASK_ADDRESS;
+  
     // Query the balance of the account
     const balance = await getTokenBalance(web3, accounts[0]);
-
+  
     // Check if the balance is less than the amount the user wishes to donate
     if (numericAmount > balance) {
-      alert('Insufficient balance. Please enter an amount less than or equal to your current balance.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Insufficient funds',
+      });
       return;
     }
-
+  
     // Close the donation modal
     setOpen(false);
-
+  
     // Show a loading alert
     Swal.fire({
       title: 'Processing transaction...',

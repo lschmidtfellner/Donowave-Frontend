@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { removeToken, removeUser } from '../api/apiService';
 import { AuthContext } from '../context/authContextComponent';
+import logoFile from '../assets/dw_logoAsset.svg'
+import hamburgerIcon from '../assets/Hamburger.png'
 import './Nav.css';
 
 function Nav() {
@@ -81,9 +83,9 @@ function Nav() {
         <div id="sticky-nav" className="sticky-nav bg-slate-50">
         {/* <div className="sticky-nav max-h-20 bg-slate-50" ref={navbarRef}> */}
           <div className="flex flex-col items-center justify-center overflow-y-auto">
-            <button onClick={openMenu} className="absolute top-0 right-0 my-10 mr-1 flex items-center justify-center"><img src="assets/Hamburger.png" className="w-1/3" /></button>
+            <button onClick={openMenu} className="absolute top-0 right-0 my-10 mr-1 flex items-center justify-center"><img src={hamburgerIcon} className="w-1/3" /></button>
             <a href="/">
-              <img src="assets/dw_logoAsset.svg" className="absolute top-0 left-0 my-10 ml-8 w-1/3 max-h-6" />
+              <img src={logoFile} className="absolute top-0 left-0 my-10 ml-8 w-1/3 max-h-6" />
             </a>
           </div>
         </div>

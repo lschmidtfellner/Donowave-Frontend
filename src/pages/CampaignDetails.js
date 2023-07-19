@@ -101,7 +101,8 @@ const CampaignDetails = () => {
                 height: '10px',
                 backgroundColor: '#8FEFB6',
                 alignItems: 'left',
-                borderRadius: '5px'
+                borderRadius: '5px',
+                boxShadow: progress === 100 ? '0px 0px 10px 5px #C2F9C6' : ''
               }}
             ></div>
           </div>

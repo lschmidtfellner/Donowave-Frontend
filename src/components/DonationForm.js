@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 import './DonationForm.css'
 
 
-export default function DonationForm({ setOpen, refreshCampaign }) {
+export default function DonationForm({ setOpen, refreshCampaign, fetchDonations }) {
   const { web3, accounts } = useContext(Web3Context);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -86,6 +86,7 @@ export default function DonationForm({ setOpen, refreshCampaign }) {
 
       // Refresh campaign data
       refreshCampaign();
+      fetchDonations();
       
     } else {
       console.error('Transaction failed:', receipt);

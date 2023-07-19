@@ -26,7 +26,7 @@ function Nav() {
 
   const openMenu = () => {
     gsap.to(menuRef.current, {
-      duration: 1,
+      duration: 2,
       left: "0%",
       opacity: 1,
       ease: "bounce.out",
@@ -44,7 +44,7 @@ function Nav() {
 
   const closeMenu = () => {
     gsap.to(menuRef.current, {
-      duration: 0.5,
+      duration: 1,
       left: "-100%",
       opacity: 0,
       ease: "power0.in",
@@ -85,7 +85,7 @@ function Nav() {
           <div className="flex flex-col items-center justify-center overflow-y-auto">
             <button onClick={openMenu} className="absolute top-0 right-0 my-10 mr-1 flex items-center justify-center"><img src={hamburgerIcon} className="w-1/3" /></button>
             <a href="/">
-              <img src={logoFile} className="absolute top-0 left-0 my-10 ml-8 w-1/3 max-h-6" />
+              <img src={logoFile} className="absolute top-0 left-0 my-10 ml-8 w-1/3" />
             </a>
           </div>
         </div>
@@ -113,7 +113,7 @@ function Nav() {
           </li>
         </ul>
         <a href="/">
-              <img src="assets/dw_logoAsset.svg" className="absolute top-0 left-0 my-10 ml-8 w-1/3" />
+              <img src={logoFile} className="absolute top-0 left-0 my-10 ml-8 w-1/3" />
             </a>
         <button onClick={closeMenu} className="absolute top-0 right-0 my-8 mr-10 flex items-center justify-center text-black rounded text-2xl font-bold">
           X

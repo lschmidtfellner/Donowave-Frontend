@@ -26,7 +26,7 @@ function Nav() {
 
   const openMenu = () => {
     gsap.to(menuRef.current, {
-      duration: 2,
+      duration: 1,
       left: "0%",
       opacity: 1,
       ease: "bounce.out",
@@ -44,7 +44,7 @@ function Nav() {
 
   const closeMenu = () => {
     gsap.to(menuRef.current, {
-      duration: 1,
+      duration: 0.5,
       left: "-100%",
       opacity: 0,
       ease: "power0.in",

@@ -69,7 +69,7 @@ const CampaignDetails = () => {
           <div className="text-left mt-4">
             <label className="font-bold text-xs">RAISED AMOUNT:</label>
             <p>
-              {Number(selectedCampaign.raised_amount).toLocaleString()}DC of {Number(selectedCampaign.goal_amount).toLocaleString()}DC
+              {Number(selectedCampaign.raised_amount).toLocaleString()} DC of {Number(selectedCampaign.goal_amount).toLocaleString()} DC
             </p>
           </div>
           <div className="text-left mt-4">

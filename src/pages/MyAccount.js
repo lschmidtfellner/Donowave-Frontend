@@ -73,9 +73,9 @@ function MyAccount() {
                 to={`/campaigns/details?id=${donation.campaign}`}
                 key={donation.id}
               >
-                <div>
+                <div style={{ padding: '15px' }}>
                   <h2>{campaigns.find(campaign => campaign.id === donation.campaign).title}</h2>
-                  <h3>{donation.amount}</h3>
+                  <h3>{donation.amount} DC</h3>
                   <h3>{dateInterpreter(donation.created_at)}</h3>
                 </div>
               </Link>

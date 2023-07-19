@@ -8,6 +8,7 @@ import { createDonation } from '../api/donationService';
 import { CampaignContext } from '../context/campaignContextComponent';
 import { AuthContext } from '../context/authContextComponent';
 import Swal from 'sweetalert2';
+import './DonationForm.css'
 
 export default function DonationForm({ setOpen, refreshCampaign }) {
   const { web3, accounts } = useContext(Web3Context);
@@ -38,7 +39,9 @@ export default function DonationForm({ setOpen, refreshCampaign }) {
     // Show a loading alert
     Swal.fire({
       title: 'Processing transaction...',
+      html: '<div class="load"></div>',
       allowOutsideClick: false,
+      showConfirmButton: false,
       onBeforeOpen: () => {
         Swal.showLoading()
       },

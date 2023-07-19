@@ -76,7 +76,7 @@ const CreateCampaign = () => {
     try {
       const response = await createCampaign(campaignData)
       console.log('Campaign created successfully:', response)
-      navigate('/') // Redirect to the home page or any other route after successful campaign creation
+      navigate('/myaccount')
     } catch (error) {
       console.error('Error creating campaign:', error)
     }

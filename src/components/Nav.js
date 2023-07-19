@@ -60,7 +60,7 @@ function Nav() {
           <div className="flex flex-col items-center justify-center overflow-y-auto">
             <button onClick={openMenu} className="absolute top-0 right-0 my-10 mr-1 flex items-center justify-center"><img src={hamburgerIcon} className="w-1/3" /></button>
             <a href="/">
-              <img src={logoFile} className="absolute top-0 left-0 my-10 ml-8 w-1/3" />
+              <img src={logoFile} className="absolute top-0 left-0 my-10 ml-8 w-1/3 max-h-6" />
             </a>
           </div>
         </div>

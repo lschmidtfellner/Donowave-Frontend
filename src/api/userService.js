@@ -11,9 +11,14 @@ export const getUser = async (id) => {
 };
 
 export const updateUser = async (id, userData) => {
-  const response = await api.put(`/api/users/${id}/`);
+  const response = await api.put(`/api/users/${id}/`, userData, {
+    headers: {
+      'Authorization': `Token ${localStorage.getItem("authToken")}`
+    }
+  });
   return response.data;
 };
+
 
 export const deleteUser = async (id) => {
   const response = await api.delete(`/api/users/${id}/`);

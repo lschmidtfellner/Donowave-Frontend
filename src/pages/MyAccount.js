@@ -1,18 +1,31 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/authContextComponent";
-import { getUserCampaigns, getUserDonations } from "../api/userService";
+import { getUserCampaigns, getUserDonations, getUser, updateUser } from "../api/userService";
 import SingleCampaign from "../components/SingleCampaign";
 import { Link } from "react-router-dom";
-import { getCampaign } from "../api/campaignService";
 import dateInterpreter from '../data/dateInterpreter'
 import { CampaignContext } from '../context/campaignContextComponent'
+import Swal from "sweetalert2";
 
 function MyAccount() {
   const { user } = useContext(AuthContext);
   const [userCampaigns, setUserCampaigns] = useState([]);
   const [userDonations, setUserDonations] = useState([]);
   const [password, setPassword] = useState('');
-  const { campaigns } = useContext(CampaignContext)
+  const [userDetails, setUserDetails] = useState(null);
+  const { campaigns } = useContext(CampaignContext);
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const userDetails = await getUser(user.user_id);
+        setUserDetails(userDetails);
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+      }
+    };
+    fetchUserDetails();
+  }, [user.user_id]);
 
   useEffect(() => {
     const fetchUserCampaignsAndDonations = async () => {
@@ -28,6 +41,46 @@ function MyAccount() {
 
     fetchUserCampaignsAndDonations();
   }, [user.user_id]);
+
+  const handlePasswordUpdate = async () => { 
+    try {
+      if (!userDetails) {
+        Swal.fire({
+          icon: 'error',
+          title: 'User details not loaded yet',
+        });
+        return;
+      }
+
+      const userData = {
+        username: userDetails.username,
+        password: password,
+        userprofile: {
+          metamask_wallet_address: userDetails.userprofile.metamask_wallet_address,
+        }
+      };
+
+      const response = await updateUser(user.user_id, userData);
+      if (response) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Password updated successfully',
+        });
+        setPassword('');
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Failed to update password',
+        });
+      }
+    } catch (error) {
+      console.error('Error updating password:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'An error occurred. Please try again later.',
+      });
+    }
+  };
 
   return (
     <div className="flex flex-col items-center mt-8 w-full mx-auto max-w-screen-lg z-50 min-h-screen">
@@ -45,7 +98,7 @@ function MyAccount() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button type="submit" className="aqua rounded-full lg:w-1/6 md:w-1/6 py-2 w-1/2 text-white font-bold  hover:text-black mt-2 text-xs">Submit</button>
+            <button type="submit" className="aqua rounded-full lg:w-1/6 md:w-1/6 py-2 w-1/2 text-white font-bold  hover:text-black mt-2 text-xs" onClick={handlePasswordUpdate}>Submit</button>
           </div>
           <div className="border-t-2 border-gray-400 my-10 w-1/2"></div>
           <h2 className="text-left text-3xl font-bold leading-9 tracking-tight text-black mb-10">

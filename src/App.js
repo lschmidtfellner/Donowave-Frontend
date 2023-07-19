@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { CampaignContextProvider } from "./context/campaignContextComponent";
-import AuthContextComponent, {
+import {
   AuthContext,
 } from "./context/authContextComponent";
 import Nav from "./components/Nav";
@@ -13,15 +13,12 @@ import CampaignDetails from "./pages/CampaignDetails";
 import DonationForm from "./components/DonationForm";
 import MyAccount from "./pages/MyAccount";
 import About from "./pages/About";
-// import BackgroundAnimation from './components/BackgroundAnimation';
 
 function App() {
   const { isLoggedIn } = useContext(AuthContext);
-  // const [isStickyNavHidden, setIsStickyNavHidden] = useState(false);
 
   return (
     <CampaignContextProvider value={{ isLoggedIn: false, setIsLoggedIn: () => { }, user: {}, setUser: () => { } }}>
-      {/* <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> */}
       <Nav />
       <Routes>
         <Route path="/signup" element={<Signup />} />
@@ -30,7 +27,6 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route
           path="/create-campaign"
-          // element={<CreateCampaign />}
           element={isLoggedIn ? <CreateCampaign /> : <Signin />}
         />
         <Route
@@ -52,4 +48,3 @@ function App() {
 }
 
 export default App;
-// ReactDOM.render(<App />, document.getElementById('root'));

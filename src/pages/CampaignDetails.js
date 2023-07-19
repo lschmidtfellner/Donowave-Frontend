@@ -1,10 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { useLocation, Link } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import {
-  campaignContextComponent,
   CampaignContext
 } from '../context/campaignContextComponent'
-import Swal from 'sweetalert2'
 import categoryURLs from '../data/categoryURLs'
 import { getCampaign } from '../api/campaignService'
 import DonationForm from '../components/DonationForm'
@@ -27,7 +25,7 @@ const CampaignDetails = () => {
   const progress = Math.min(
     (parseInt(selectedCampaign.raised_amount) /
       parseInt(selectedCampaign.goal_amount)) *
-      100,
+    100,
     100
   )
 

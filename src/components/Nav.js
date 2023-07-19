@@ -34,12 +34,6 @@ function Nav() {
         setIsStickyNavHidden(true);
       },
     });
-    // gsap.set(navbarRef.current, { 
-    //   duration: 1,
-    //   top: "-100%",
-    //   opacity: 0,
-    //   ease: "power0.in",
-    // });
   };
 
   const closeMenu = () => {
@@ -52,30 +46,11 @@ function Nav() {
         setIsStickyNavHidden(false);
       },
     });
-    // gsap.set(navbarRef.current, { 
-    //   duration: 2,
-    //   top: "0%",
-    //   opacity: 0.8,
-    //   ease: "slowmo.out",
-    // });
   };
 
   useEffect(() => {
     gsap.set(menuRef.current, { left: "-100%", opacity: 0 });
-    // gsap.set(navbarRef.current, { opacity: 0.8 });
   }, []);
-
-  // useEffect(() => {
-  //   if (isStickyNavHidden) {
-  //     gsap.fromTo(
-  //       '#sticky-nav',
-  //       { opacity: 0 },
-  //       { opacity: 0.8, duration: 1, ease: 'power2.out' }
-  //     );
-  //   }
-  // }, [isStickyNavHidden]);
-
-
 
   return (
     <>

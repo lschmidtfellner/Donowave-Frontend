@@ -4,7 +4,7 @@ import {
   CampaignContext
 } from '../context/campaignContextComponent'
 import categoryURLs from '../data/categoryURLs'
-import { getCampaign } from '../api/campaignService'
+import { getCampaign, getCampaignDonations } from '../api/campaignService'
 import DonationForm from '../components/DonationForm'
 import { Web3Context } from '../context/web3Context'
 import dateInterpreter from '../data/dateInterpreter'

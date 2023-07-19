@@ -1,42 +1,44 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { useLocation, Link } from 'react-router-dom'
-import {
-  campaignContextComponent,
-  CampaignContext
-} from '../context/campaignContextComponent'
-import Swal from 'sweetalert2'
-import categoryURLs from '../data/categoryURLs'
-import { getCampaign } from '../api/campaignService'
-import DonationForm from '../components/DonationForm'
-import { Web3Context } from '../context/web3Context'
-import dateInterpreter from '../data/dateInterpreter'
+import React, { useContext, useState, useEffect } from 'react';
+import { useLocation, Link } from 'react-router-dom';
+import { CampaignContext } from '../context/campaignContextComponent';
+import Swal from 'sweetalert2';
+import categoryURLs from '../data/categoryURLs';
+import { getCampaign, getCampaignDonations } from '../api/campaignService';
+import DonationForm from '../components/DonationForm';
+import { Web3Context } from '../context/web3Context';
+import dateInterpreter from '../data/dateInterpreter';
 
 const CampaignDetails = () => {
-  const { campaigns } = useContext(CampaignContext)
-  const { web3, accounts } = useContext(Web3Context)
-  const location = useLocation()
-  const queryParams = new URLSearchParams(location.search)
-  const selectedCampaignId = queryParams.get('id')
-  const [selectedCampaign, setSelectedCampaign] = useState({})
-  const [openDonate, setOpenDonate] = useState(false)
+  const { campaigns } = useContext(CampaignContext);
+  const { web3, accounts } = useContext(Web3Context);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const selectedCampaignId = queryParams.get('id');
+  const [selectedCampaign, setSelectedCampaign] = useState({});
+  const [openDonate, setOpenDonate] = useState(false);
+  const [donations, setDonations] = useState([]);
 
   const fetchCampaign = async () => {
-    const campaign = await getCampaign(selectedCampaignId)
-    setSelectedCampaign(campaign)
+    const campaign = await getCampaign(selectedCampaignId);
+    setSelectedCampaign(campaign);
   }
+
+  const fetchDonations = async () => {
+    const donationsData = await getCampaignDonations(selectedCampaignId);
+    setDonations(donationsData);
+  }
+
   const progress = Math.min(
-    (parseInt(selectedCampaign.raised_amount) /
-      parseInt(selectedCampaign.goal_amount)) *
-      100,
+    (parseInt(selectedCampaign.raised_amount) / parseInt(selectedCampaign.goal_amount)) * 100,
     100
-  )
+  );
 
   useEffect(() => {
-    console.log('Running useEffect', { campaigns, selectedCampaignId })
     if (selectedCampaignId) {
-      fetchCampaign()
+      fetchCampaign();
+      fetchDonations();
     }
-  }, [selectedCampaignId])
+  }, [selectedCampaignId]);
 
   if (Object.keys(selectedCampaign).length === 0) {
     return <p>Loading...</p>
@@ -45,15 +47,15 @@ const CampaignDetails = () => {
   const handleDonateClick = async () => {
     if (!web3 || accounts.length === 0) {
       if (window.ethereum) {
-        await window.ethereum.request({ method: 'eth_requestAccounts' })
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
       }
     }
-    setOpenDonate(true)
+    setOpenDonate(true);
   }
 
   const btnColor = categoryURLs.find(
     (catObj) => catObj.category === selectedCampaign.category
-  ).hex
+  ).hex;
 
   return (
     <div className="campaignFeed w-10/12 mt-8 mx-auto">
@@ -107,11 +109,17 @@ const CampaignDetails = () => {
               }}
             ></div>
           </div>
-
+          <div>
+          <h3>Latest Donations</h3>
+          {donations.slice(-3).reverse().map((donation, index) => (
+            <div key={index}>
+              <p>Amount: {donation.amount}</p>
+              <p>On: {dateInterpreter(donation.created_at)}</p>
+            </div>
+          ))}
+        </div>
           <button
-            style={{
-              backgroundColor: btnColor
-            }}
+            style={{ backgroundColor: btnColor }}
             onClick={handleDonateClick}
             className="rounded-full lg:w-1/6 md:w-1/6 py-2 w-1/2 text-white font-bold hover:text-black mt-4 text-xs"
           >
@@ -121,12 +129,13 @@ const CampaignDetails = () => {
             <DonationForm
               setOpen={setOpenDonate}
               refreshCampaign={fetchCampaign}
+              fetchDonations={fetchDonations}
             />
           )}
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default CampaignDetails
+export default CampaignDetails;

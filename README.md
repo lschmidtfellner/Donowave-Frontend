@@ -1,6 +1,6 @@
 # DonoWave
 
-DonoWave is a modern fundraising platform that allows users to create campaigns and donate using DonoCoin, our own cryptocurrency. With the power of MetaMask wallet integration, we are revolutionizing philanthropy in the crypto era. Join us in making a difference, one DonoCoin at a time. Click <a href="donowave.netlify.app" target="_blank" rel="noreferrer"> to view our app.
+DonoWave is a modern fundraising platform that allows users to create campaigns and donate using DonoCoin, our own cryptocurrency. With the power of MetaMask wallet integration, we are revolutionizing philanthropy in the crypto era. Join us in making a difference, one DonoCoin at a time. Click [<a href="http://donowave.netlify.app" target="_blank" rel="noreferrer"> here] to view our app.
 
 ## Features
 
